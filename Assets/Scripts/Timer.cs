@@ -20,10 +20,19 @@ public class TimerController : MonoBehaviour
     public bool hasLimit;
     public float timerLimit;
 
+    [Header("FormatSettings")]
+    public bool hasFormat;
+    public TimerFormats format;
+    //timerFormats is an object that controls the format once its selected
+    private Dictionary<TimerFormats, string> timerFormats = new Dictionary<TimerFormats, string>();
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        timerFormats.Add(TimerFormats.Whole, "0");
+        timerFormats.Add(TimerFormats.TenthDecimal, "0.0");
+        timerFormats.Add(TimerFormats.HundrethsDecimal, "0.00");
+
     }
 
     // Update is called once per frame
@@ -46,14 +55,16 @@ public class TimerController : MonoBehaviour
 
     private void SetTimerText()
     {
-        timerText.text = currentTime.ToString();
+        //if user wants a format with their time, go for it. else, do the default
+        timerText.text = hasFormat ? currentTime.ToString(timerFormats[format]) : currentTime.ToString();
     }
 
 
+}
 
-
-
-
-
-
+public enum TimerFormats
+{
+    Whole,
+    TenthDecimal,
+    HundrethsDecimal
 }
