@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 ///<summary>
 /// This class manages the controls for the pomotimer
@@ -11,6 +12,8 @@ public class TimerController : MonoBehaviour
 
     [Header("Component")]
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI buttonText;
+    public Button button;
 
     [Header("Timer Settings")]
     public float currentTime;
@@ -47,7 +50,21 @@ public class TimerController : MonoBehaviour
             currentTime = timerLimit;
             SetTimerText();
             timerText.color = Color.red;
+            if (buttonText.text == "Pomo")
+            {
+                buttonText.text = "Break";
+                button.image.color = Color.cyan;
+            }
+            else
+            {
+                buttonText.text = "Pomo";
+                button.image.color = Color.red;
+            }
             enabled = false; //causes the component to stop running
+        }
+        else
+        {
+            timerText.color = Color.black;
         }
 
         SetTimerText();
