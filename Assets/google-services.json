@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "604764329594",
+    "project_id": "pomopaca-d0c1d",
+    "storage_bucket": "pomopaca-d0c1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604764329594:android:3a6d28b117514427ff0dc3",
+        "android_client_info": {
+          "package_name": "com.SaturdayBois.PomoPaca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604764329594-s8kf51e7v9nldo39ph5li9godjlb7uaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkF1EetC1MMOPYpmJPMD_sLEUcHyPNXg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604764329594-s8kf51e7v9nldo39ph5li9godjlb7uaf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
