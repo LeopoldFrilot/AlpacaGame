@@ -852,8 +852,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1965036077}
         m_TargetAssemblyTypeName: PomodoroManager, Assembly-CSharp
-        m_MethodName: StartNewCountdownTimer
-        m_Mode: 4
+        m_MethodName: StartTimer
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -909,8 +909,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1965036076}
-  - component: {fileID: 1965036075}
   - component: {fileID: 1965036077}
+  - component: {fileID: 1965036078}
   m_Layer: 0
   m_Name: TimerManager
   m_TagString: Untagged
@@ -918,27 +918,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1965036075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965036074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4d957b2dd858d47ac46261057aa5f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 2066765490}
-  buttonText: {fileID: 832123540}
-  button: {fileID: 1676433171}
-  currentTime: 0
-  countDown: 0
-  hasLimit: 1
-  timerLimit: 3
-  hasFormat: 1
-  format: 2
 --- !u!4 &1965036076
 Transform:
   m_ObjectHideFlags: 0
@@ -966,7 +945,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638452a088a957141a3f50581a1ab9f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerController: {fileID: 1965036075}
+  timerUIController: {fileID: 1965036078}
+  hasLimit: 1
+  timerLimit: 0
+--- !u!114 &1965036078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965036074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e244ce4c0ba757543839b38cb9037ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 2066765490}
+  buttonText: {fileID: 832123540}
+  button: {fileID: 1676433171}
+  hasFormat: 1
+  format: 1
 --- !u!1 &1981126075
 GameObject:
   m_ObjectHideFlags: 0

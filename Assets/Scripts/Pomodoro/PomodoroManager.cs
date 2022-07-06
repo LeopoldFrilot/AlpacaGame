@@ -4,32 +4,75 @@ using UnityEngine;
 
 public class PomodoroManager : MonoBehaviour
 {
-    /* TEMPORARY LOGIC: PLEASE REWORK */
-    public TimerController timerController;
-    bool timerStopped = true;
+    public TimerUIController timerUIController;
 
-    void Awake()
+    [SerializeField] bool hasLimit;
+    [SerializeField] float timerLimit;
+
+    bool timerStopped = true;
+    float currentTime;
+    PomodoroState currentState;
+
+    private void Start()
     {
-        // Initializing timer to 5 seconds just for testing
-        timerController.currentTime = 5f;
-        timerController.countDown = true;
-        timerController.enabled = true;
-        timerController.timerLimit = 0f;
+        currentState = PomodoroState.None;
+        EventHub.TriggerPomodoroStateSwitch(currentState);
     }
 
     void Update()
     {
-        if (!timerStopped && !timerController.enabled) // Temporary timer-end condition
+        if (!timerStopped)
         {
-            timerStopped = true;
+            currentTime -= Time.deltaTime;
+            if (hasLimit && currentTime <= timerLimit)
+            {
+                timerStopped = true;
+                UpdatePomoState();
+            }
+
+            timerUIController.ChangeTime(currentTime, timerStopped);
         }
     }
 
-    public void StartNewCountdownTimer(float time)
+    public void StartTimer()
     {
-        timerController.currentTime = time;
-        timerController.countDown = true;
-        timerController.enabled = true;
-        timerController.timerLimit = 0f;
+        if (currentState == PomodoroState.None || currentState == PomodoroState.Pomodoro)
+        {
+            StartNewCountdownTimer(/*Helper.MinutesToSeconds(25)*/ 25f, PomodoroState.Pomodoro); // Just 25 seconds for now
+        }
+        else if (currentState == PomodoroState.Break)
+        {
+            StartNewCountdownTimer(/*Helper.MinutesToSeconds(5)*/ 5f, PomodoroState.Break); // Just 5 seconds for now
+        }
+    }
+    
+    private void StartNewCountdownTimer(float time, PomodoroState state)
+    {
+        if (state == PomodoroState.None)
+        {
+            return;
+        }
+        currentTime = time;
+        timerStopped = false;
+
+        if (state != currentState)
+        {
+            currentState = state;
+            EventHub.TriggerPomodoroStateSwitch(currentState);
+        }
+    }
+
+    private void UpdatePomoState()
+    {
+        if (currentState == PomodoroState.Pomodoro)
+        {
+            currentState = PomodoroState.Break;
+            EventHub.TriggerPomodoroStateSwitch(currentState);
+        }
+        else if (currentState == PomodoroState.Break)
+        {
+            currentState = PomodoroState.None;
+            EventHub.TriggerPomodoroStateSwitch(currentState);
+        }
     }
 }
