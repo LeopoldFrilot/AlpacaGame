@@ -1,16 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class EventHub
 {
-    /*
-    public static event Action<PlayerCharacter> OnPlayerDeath;
-    public static void TriggerPlayerDeath(PlayerCharacter character)
+    public static event Action<PomodoroState> OnPomodoroStateSwitch;
+    public static void TriggerPomodoroStateSwitch(PomodoroState newState)
     {
-        OnPlayerDeath?.Invoke(character);
+        OnPomodoroStateSwitch?.Invoke(newState);
     }
 
+    /*
     public static event Action<PlayerCharacter> OnPlayerBirth;
     public static void TriggerPlayerBirth(PlayerCharacter character)
     {

@@ -6,7 +6,7 @@ public enum SceneType
 {
     None,
     Farm,
-    Villiage,
+    Village,
     Fair
 }
 public interface IGameScene

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VilliageScene : MonoBehaviour, IGameScene
+public class VillageScene : MonoBehaviour, IGameScene
 {
     public SceneType GetSceneType()
     {
-        return SceneType.Villiage;
+        return SceneType.Village;
     }
 
     public void Initialize()
