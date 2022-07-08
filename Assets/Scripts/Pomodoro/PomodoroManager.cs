@@ -16,7 +16,7 @@ public class PomodoroManager : MonoBehaviour
     private void Start()
     {
         currentState = PomodoroState.None;
-        EventHub.TriggerPomodoroStateSwitch(currentState);
+        EventHub.Instance.TriggerPomodoroStateSwitch(currentState);
     }
 
     void Update()
@@ -58,7 +58,7 @@ public class PomodoroManager : MonoBehaviour
         if (state != currentState)
         {
             currentState = state;
-            EventHub.TriggerPomodoroStateSwitch(currentState);
+            EventHub.Instance.TriggerPomodoroStateSwitch(currentState);
         }
     }
 
@@ -67,12 +67,12 @@ public class PomodoroManager : MonoBehaviour
         if (currentState == PomodoroState.Pomodoro)
         {
             currentState = PomodoroState.Break;
-            EventHub.TriggerPomodoroStateSwitch(currentState);
+            EventHub.Instance.TriggerPomodoroStateSwitch(currentState);
         }
         else if (currentState == PomodoroState.Break)
         {
             currentState = PomodoroState.None;
-            EventHub.TriggerPomodoroStateSwitch(currentState);
+            EventHub.Instance.TriggerPomodoroStateSwitch(currentState);
         }
     }
 }
