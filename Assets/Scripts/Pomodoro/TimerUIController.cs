@@ -70,12 +70,12 @@ public class TimerUIController : MonoBehaviour
 
     public void OnEnable()
     {
-        EventHub.Instance.OnPomodoroStateSwitch += UpdatePomoMode;
+        EventHub.OnPomodoroStateSwitch += UpdatePomoMode;
     }
 
     public void OnDisable()
     {
-        EventHub.Instance.OnPomodoroStateSwitch -= UpdatePomoMode;
+        EventHub.OnPomodoroStateSwitch -= UpdatePomoMode;
     }
 }
 public enum TimerFormats
