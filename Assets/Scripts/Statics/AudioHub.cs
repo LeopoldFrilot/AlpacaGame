@@ -8,6 +8,7 @@ public class AudioHub : MonoBehaviour
     private float iniMusicVolume;
     private List<AudioSource> loopingClips = new List<AudioSource>();
     private List<float> initialVolumes = new List<float>();
+    private AudioSource audioSource;
 
     #region Singleton
     private static AudioHub _instance;
@@ -37,8 +38,6 @@ public class AudioHub : MonoBehaviour
         }
     }
     #endregion
-
-    private AudioSource audioSource;
 
     private void Start()
     {
