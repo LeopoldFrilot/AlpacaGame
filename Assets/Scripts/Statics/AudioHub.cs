@@ -116,13 +116,13 @@ public class AudioHub : MonoBehaviour
 
     private void OnEnable()
     {
-        EventHub.Instance.OnSFXVolumeChanged += UpdateLoopingSFX;
-        EventHub.Instance.OnMusicVolumeChanged += UpdateMusic;
+        EventHub.OnSFXVolumeChanged += UpdateLoopingSFX;
+        EventHub.OnMusicVolumeChanged += UpdateMusic;
     }
 
     private void OnDisable()
     {
-        EventHub.Instance.OnSFXVolumeChanged -= UpdateLoopingSFX;
-        EventHub.Instance.OnMusicVolumeChanged -= UpdateMusic;
+        EventHub.OnSFXVolumeChanged -= UpdateLoopingSFX;
+        EventHub.OnMusicVolumeChanged -= UpdateMusic;
     }
 }
