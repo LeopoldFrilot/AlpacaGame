@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 3739187434474451109}
   - component: {fileID: 661961127}
   m_Layer: 0
-  m_Name: GameWizard
+  m_Name: Essentials
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
