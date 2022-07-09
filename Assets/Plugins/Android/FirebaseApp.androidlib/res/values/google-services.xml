@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
-  <string name="gcm_defaultSenderId" translatable="false">604764329594</string>
-  <string name="google_storage_bucket" translatable="false">pomopaca-d0c1d.appspot.com</string>
-  <string name="project_id" translatable="false">pomopaca-d0c1d</string>
-  <string name="google_api_key" translatable="false">AIzaSyCkF1EetC1MMOPYpmJPMD_sLEUcHyPNXg0</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCkF1EetC1MMOPYpmJPMD_sLEUcHyPNXg0</string>
-  <string name="google_app_id" translatable="false">1:604764329594:android:3a6d28b117514427ff0dc3</string>
-  <string name="default_web_client_id" translatable="false">604764329594-s8kf51e7v9nldo39ph5li9godjlb7uaf.apps.googleusercontent.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">720317744742</string>
+  <string name="google_storage_bucket" translatable="false">pacapomo-dfca1.appspot.com</string>
+  <string name="project_id" translatable="false">pacapomo-dfca1</string>
+  <string name="google_api_key" translatable="false">AIzaSyCX8senukv7lYjXZZBxM0lHvFmT5NsHBZA</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCX8senukv7lYjXZZBxM0lHvFmT5NsHBZA</string>
+  <string name="google_app_id" translatable="false">1:720317744742:android:d863431bd775ee069e0fa7</string>
+  <string name="default_web_client_id" translatable="false">720317744742-givclhu2757kd4b6p8lskjt1ao5bvikv.apps.googleusercontent.com</string>
 </resources>
