@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class FirebaseInitializer : MonoBehaviour
 {
     public UnityEvent onFirebaseInitialized;
-
+    /*
     private void Awake()
     {
         StartCoroutine(CheckAndFixDependenciesCoroutine());
@@ -28,4 +28,5 @@ public class FirebaseInitializer : MonoBehaviour
             // Firebase Unity SDK is not safe to use here.
         }
     }
+    */
 }
