@@ -35,6 +35,7 @@ public class AudioHub : MonoBehaviour
         else
         {
             _instance = this;
+            DontDestroyOnLoad(_instance.gameObject);
         }
     }
     #endregion
@@ -51,7 +52,7 @@ public class AudioHub : MonoBehaviour
 
     public void PlayClip(AudioClip clip, float volumeScale)
     {
-        if (audioSource && clip)
+        if (audioSource != null && clip != null)
         {
             audioSource.PlayOneShot(clip, ScaleSFXVolume(volumeScale));
         }
@@ -87,7 +88,7 @@ public class AudioHub : MonoBehaviour
         //float val = StaticSettings.sfxVolumeScalar;
         //if (StaticSettings.sfxVolumeMuted) val *= 0f;
         //return rawVal * val;
-        return 1f;
+        return rawVal;
     }
 
     private float ScaleMusicVolume(float rawVal)
@@ -95,7 +96,7 @@ public class AudioHub : MonoBehaviour
         //float val = StaticSettings.musicVolumeScalar;
         //if (StaticSettings.musicVolumeMuted) val *= 0f;
         //return rawVal * val;
-        return 1f;
+        return rawVal;
     }
 
     private void UpdateLoopingSFX()
