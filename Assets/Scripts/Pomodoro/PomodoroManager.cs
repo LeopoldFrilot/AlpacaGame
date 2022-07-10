@@ -25,6 +25,7 @@ public class PomodoroManager : MonoBehaviour
     {
         currentState = PomodoroState.None;
         EventHub.TriggerPomodoroStateSwitch(currentState);
+        FB.LogTestEvent();
     }
 
     void Update()
