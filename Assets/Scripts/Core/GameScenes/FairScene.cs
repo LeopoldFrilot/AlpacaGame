@@ -11,6 +11,6 @@ public class FairScene : MonoBehaviour, IGameScene
 
     public void Initialize()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
