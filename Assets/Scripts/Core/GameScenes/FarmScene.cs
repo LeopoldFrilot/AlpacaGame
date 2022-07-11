@@ -11,6 +11,6 @@ public class FarmScene : MonoBehaviour, IGameScene
 
     public void Initialize()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

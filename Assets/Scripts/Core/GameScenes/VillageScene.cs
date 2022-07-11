@@ -11,6 +11,6 @@ public class VillageScene : MonoBehaviour, IGameScene
 
     public void Initialize()
     {
-        throw new System.NotImplementedException();
+        
     }
 }
