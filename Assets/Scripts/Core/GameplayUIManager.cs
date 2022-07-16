@@ -7,6 +7,7 @@ public class GameplayUIManager : MonoBehaviour
     public GameObject FarmUIObj;
     public GameObject VillageUIObj;
     public GameObject FairUIObj;
+    public GameObject ReturnObj;
 
     public void SwitchToFarmUI()
     {
@@ -26,10 +27,17 @@ public class GameplayUIManager : MonoBehaviour
         FairUIObj.SetActive(true);
     }
 
+    public void SwitchToReturnUI()
+    {
+        HideAll();
+        ReturnObj.SetActive(true);
+    }
+
     public void HideAll()
     {
         FarmUIObj.SetActive(false);
         VillageUIObj.SetActive(false);
         FairUIObj.SetActive(false);
+        ReturnObj.SetActive(false);
     }
 }
