@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PomodoroManager : MonoBehaviour
@@ -88,5 +86,23 @@ public class PomodoroManager : MonoBehaviour
             currentState = PomodoroState.None;
             EventHub.TriggerPomodoroStateSwitch(currentState);
         }
+    }
+
+    private void EndTimer()
+    {
+        if (!timerStopped)
+        {
+            currentTime = 0f;
+        }
+    }
+
+    private void OnEnable()
+    {
+        EventHub.OnTimerForceEnd += EndTimer;
+    }
+
+    private void OnDisable()
+    {
+        EventHub.OnTimerForceEnd -= EndTimer;
     }
 }

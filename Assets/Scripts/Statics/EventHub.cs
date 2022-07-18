@@ -19,4 +19,10 @@ public static class EventHub
     {
         OnSFXVolumeChanged?.Invoke();
     }
+    
+    public static event Action OnTimerForceEnd;
+    public static void TriggerTimerForceEnd()
+    {
+        OnTimerForceEnd?.Invoke();
+    }
 }
