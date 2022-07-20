@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,11 @@ public class GameplayManager : MonoBehaviour
     public FairScene fair;
 
     private IGameScene currentScene;
+
+    private void Start()
+    {
+        SwitchToFarm();
+    }
 
     public void SwitchToFarm()
     {
@@ -48,5 +54,10 @@ public class GameplayManager : MonoBehaviour
                 currentScene.Initialize();
             }
         }
+    }
+
+    public IGameScene GetCurrentScene()
+    {
+        return currentScene;
     }
 }

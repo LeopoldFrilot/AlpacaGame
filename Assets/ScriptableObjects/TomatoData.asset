@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c0f59441df11644a08da6e151fc9be, type: 3}
+  m_Name: TomatoData
+  m_EditorClassIdentifier: 
+  cropType: 0
+  timeToGrowOneRankInMinutes: 25
+  growthSprites:
+  - {fileID: 21300000, guid: dad717e90ebdfd442be4b8064417e45b, type: 3}
+  - {fileID: 21300000, guid: 66560e269b7cca94f8569f22b9bae494, type: 3}
+  - {fileID: 21300000, guid: c89700a841e58e447989513044d420b1, type: 3}
+  - {fileID: 21300000, guid: df8da50ee8a1ff8418a685272a62ca54, type: 3}
