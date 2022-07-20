@@ -8,4 +8,9 @@ public static class Helper
     {
         return minutes * 60f;
     }
+
+    public static float SecondsToMinutes(float seconds)
+    {
+        return seconds / 60f;
+    }
 }

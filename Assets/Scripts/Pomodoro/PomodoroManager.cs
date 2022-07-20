@@ -18,7 +18,9 @@ public class PomodoroManager : MonoBehaviour
     [SerializeField] 
 
     bool timerStopped = true;
-    float currentTime;
+
+    private float startingTimeInMinutes;
+    float currentTimeInSeconds;
     PomodoroState currentState;
 
     private void Start()
@@ -32,15 +34,19 @@ public class PomodoroManager : MonoBehaviour
     {
         if (!timerStopped)
         {
-            currentTime -= Time.deltaTime;
-            if (hasLimit && currentTime <= timerLimit)
+            currentTimeInSeconds -= Time.deltaTime;
+            if (hasLimit && currentTimeInSeconds <= timerLimit)
             {
                 AudioHub.Instance.PlayClip(timerOverSound, timerOverSoundVolume);
                 timerStopped = true;
+                if (currentState == PomodoroState.Pomodoro)
+                {
+                    EventHub.TriggerPomodoroEnded(startingTimeInMinutes);
+                }
                 UpdatePomoState();
             }
 
-            timerUIController.ChangeTime(currentTime, timerStopped);
+            timerUIController.ChangeTime(currentTimeInSeconds, timerStopped);
         }
     }
 
@@ -58,13 +64,14 @@ public class PomodoroManager : MonoBehaviour
         }
     }
     
-    private void StartNewCountdownTimer(float time, PomodoroState state)
+    private void StartNewCountdownTimer(float timeInSeconds, PomodoroState state)
     {
         if (state == PomodoroState.None)
         {
             return;
         }
-        currentTime = time;
+        currentTimeInSeconds = timeInSeconds;
+        startingTimeInMinutes = Helper.SecondsToMinutes(currentTimeInSeconds);
         timerStopped = false;
 
         if (state != currentState)
@@ -92,7 +99,7 @@ public class PomodoroManager : MonoBehaviour
     {
         if (!timerStopped)
         {
-            currentTime = 0f;
+            currentTimeInSeconds = 0f;
         }
     }
 
