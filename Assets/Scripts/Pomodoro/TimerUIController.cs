@@ -9,23 +9,34 @@ using UnityEngine.UI;
 ///</summary>
 public class TimerUIController : MonoBehaviour
 {
+    
     [Header("Component")]
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] TextMeshProUGUI buttonText;
-    [SerializeField] Button button;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private Button button;
+    [SerializeField] private TMP_Dropdown dropdownPomo;
+    [SerializeField] private TMP_Dropdown dropdownBreak;
 
     [Header("FormatSettings")]
     [SerializeField] bool hasFormat;
     [SerializeField] TimerFormats format;
+    
     //timerFormats is an object that controls the format once its selected
     private Dictionary<TimerFormats, string> timerFormats = new Dictionary<TimerFormats, string>();
 
+    private float storedPomoTime;
+    private float storedBreakTime;
+    
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         timerFormats.Add(TimerFormats.Whole, "0");
         timerFormats.Add(TimerFormats.TenthDecimal, "0.0");
-        timerFormats.Add(TimerFormats.HundrethsDecimal, "0.00");
+        timerFormats.Add(TimerFormats.HundrethsDecimal, "0.00");  
+        dropdownPomo.onValueChanged.AddListener(delegate { DropdownPomodoroValueChanged(dropdownPomo);});
+        dropdownBreak.onValueChanged.AddListener(delegate { DropdownBreakValueChanged(dropdownBreak);});
+        DropdownPomodoroValueChanged(dropdownPomo);
+        DropdownBreakValueChanged(dropdownBreak);
     }
 
     public void ChangeTime(float time, bool isFinished)
@@ -46,7 +57,9 @@ public class TimerUIController : MonoBehaviour
     private void SetTimerText(float currentTime)
     {
         //if user wants a format with their time, go for it. else, do the default
-        timerText.text = hasFormat ? currentTime.ToString(timerFormats[format]) : currentTime.ToString();
+        int minutes = (int)currentTime / 60;
+        float seconds = currentTime - minutes * 60;
+        timerText.text = minutes + ":" + (hasFormat ? seconds.ToString(timerFormats[format]) : seconds.ToString());
     }
 
     private void UpdatePomoMode(PomodoroState state)
@@ -66,6 +79,21 @@ public class TimerUIController : MonoBehaviour
             buttonText.text = "Pomo";
             button.image.color = Color.red;
         }
+    }
+    
+    private void DropdownPomodoroValueChanged(TMP_Dropdown change)
+    {
+        storedPomoTime = Helper.MinutesToSeconds(change.value * 5f + 25f);
+    }
+    
+    private void DropdownBreakValueChanged(TMP_Dropdown change)
+    {
+        storedBreakTime = Helper.MinutesToSeconds(change.value * 5f + 5f);
+    }
+
+    public Vector2 GetPomodoroTimes()
+    {
+        return new Vector2(storedPomoTime, storedBreakTime);
     }
 
     public void OnEnable()

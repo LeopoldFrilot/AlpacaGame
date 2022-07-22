@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 3739187435725045264}
   - component: {fileID: 3739187435725045263}
   - component: {fileID: 5092569844053758712}
+  - component: {fileID: 5085312645009866499}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -375,7 +376,7 @@ RectTransform:
   m_GameObject: {fileID: 3739187435725045262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3739187435025983166}
@@ -397,7 +398,7 @@ Canvas:
   m_GameObject: {fileID: 3739187435725045262}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -431,7 +432,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3739187435725045263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,6 +466,18 @@ MonoBehaviour:
   switchSceneSoundVolume: 1
   quitSound: {fileID: 8300000, guid: 08a9c82b933438e428fc49833a20c607, type: 3}
   quitSoundVolume: 1
+--- !u!114 &5085312645009866499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3739187435725045262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f59e16bb7ce0b54d8b8b787580f05df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3739187435775424136
 GameObject:
   m_ObjectHideFlags: 0

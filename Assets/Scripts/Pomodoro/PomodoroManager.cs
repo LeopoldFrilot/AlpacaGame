@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PomodoroManager : MonoBehaviour
@@ -16,9 +14,13 @@ public class PomodoroManager : MonoBehaviour
     
     [SerializeField] bool hasLimit;
     [SerializeField] float timerLimit;
+    
+    [SerializeField] 
 
     bool timerStopped = true;
-    float currentTime;
+
+    private float startingTimeInMinutes;
+    float currentTimeInSeconds;
     PomodoroState currentState;
 
     private void Start()
@@ -32,15 +34,19 @@ public class PomodoroManager : MonoBehaviour
     {
         if (!timerStopped)
         {
-            currentTime -= Time.deltaTime;
-            if (hasLimit && currentTime <= timerLimit)
+            currentTimeInSeconds -= Time.deltaTime;
+            if (hasLimit && currentTimeInSeconds <= timerLimit)
             {
                 AudioHub.Instance.PlayClip(timerOverSound, timerOverSoundVolume);
                 timerStopped = true;
+                if (currentState == PomodoroState.Pomodoro)
+                {
+                    EventHub.TriggerPomodoroEnded(startingTimeInMinutes);
+                }
                 UpdatePomoState();
             }
 
-            timerUIController.ChangeTime(currentTime, timerStopped);
+            timerUIController.ChangeTime(currentTimeInSeconds, timerStopped);
         }
     }
 
@@ -49,22 +55,23 @@ public class PomodoroManager : MonoBehaviour
         if (currentState == PomodoroState.None || currentState == PomodoroState.Pomodoro)
         {
             AudioHub.Instance.PlayClip(pomoStartSound, pomoStartSoundVolume);
-            StartNewCountdownTimer(/*Helper.MinutesToSeconds(25)*/ 25f, PomodoroState.Pomodoro); // Just 25 seconds for now
+            StartNewCountdownTimer(timerUIController.GetPomodoroTimes().x, PomodoroState.Pomodoro); // Just 25 seconds for now
         }
         else if (currentState == PomodoroState.Break)
         {
             AudioHub.Instance.PlayClip(breakStartSound, breakStartSoundVolume);
-            StartNewCountdownTimer(/*Helper.MinutesToSeconds(5)*/ 5f, PomodoroState.Break); // Just 5 seconds for now
+            StartNewCountdownTimer(timerUIController.GetPomodoroTimes().y, PomodoroState.Break); // Just 5 seconds for now
         }
     }
     
-    private void StartNewCountdownTimer(float time, PomodoroState state)
+    private void StartNewCountdownTimer(float timeInSeconds, PomodoroState state)
     {
         if (state == PomodoroState.None)
         {
             return;
         }
-        currentTime = time;
+        currentTimeInSeconds = timeInSeconds;
+        startingTimeInMinutes = Helper.SecondsToMinutes(currentTimeInSeconds);
         timerStopped = false;
 
         if (state != currentState)
@@ -86,5 +93,23 @@ public class PomodoroManager : MonoBehaviour
             currentState = PomodoroState.None;
             EventHub.TriggerPomodoroStateSwitch(currentState);
         }
+    }
+
+    private void EndTimer()
+    {
+        if (!timerStopped)
+        {
+            currentTimeInSeconds = 0f;
+        }
+    }
+
+    private void OnEnable()
+    {
+        EventHub.OnTimerForceEnd += EndTimer;
+    }
+
+    private void OnDisable()
+    {
+        EventHub.OnTimerForceEnd -= EndTimer;
     }
 }
