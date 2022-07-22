@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class FarmScene : MonoBehaviour, IGameScene
 {
+    private enum CropGridStatus
+    {
+        Null,
+        Tilled,
+        Seeded
+    }
+    
     [SerializeField] private GameObject cropPrefab;
-    private List<NonInteractionZones> nonIntZones = new List<NonInteractionZones>();
+    [SerializeField] private List<NonInteractionZones> nonIntZones = new List<NonInteractionZones>();
+    
+    public GridManager cropGridManager;
+    
     private List<CropRoot> cropRoots = new List<CropRoot>();
     public SceneType GetSceneType()
     {
@@ -16,40 +26,42 @@ public class FarmScene : MonoBehaviour, IGameScene
     {
         foreach (var cropRoot in FindObjectsOfType<CropRoot>())
         {
-            cropRoots.Add(cropRoot);
-        }
-        foreach (var zone in FindObjectsOfType<NonInteractionZones>())
-        {
-            Debug.Log(zone);
-            nonIntZones.Add(zone);
+            AddCrop(cropRoot);
         }
     }
 
     public void HandleClick(Vector2 worldPos)
     {
-        foreach (var zone in nonIntZones)
+        if (cropGridManager.ValidGridClick(worldPos))
         {
-            if (zone.collider != null && zone.gameObject.activeSelf && zone.collider.bounds.Contains(worldPos))
+            foreach (var zone in nonIntZones)
             {
-                return;
+                if (zone.collider != null && zone.gameObject.activeSelf && zone.collider.bounds.Contains(worldPos))
+                {
+                    return;
+                }
+            }
+            
+            switch ((CropGridStatus)cropGridManager.GetValue(worldPos))
+            {
+                case CropGridStatus.Null:
+                    TillSoil(worldPos);
+                    break;
+                
+                default:
+                    foreach (var crop in cropRoots)
+                    {
+                        if (crop.WouldBeClicked(worldPos))
+                        {
+                            crop.HandleClickDown(worldPos);
+                            cropGridManager.UpdateGridValue(worldPos, (int)(crop.IsSeeded() ? CropGridStatus.Seeded : CropGridStatus.Tilled));
+                            break;
+                        }
+                    }
+                    break;
             }
         }
         
-        bool cropFound = false;
-        foreach (var crop in cropRoots)
-        {
-            if (crop.WouldBeClicked(worldPos))
-            {
-                crop.HandleClickDown(worldPos);
-                cropFound = true;
-                break;
-            }
-        }
-
-        if (!cropFound)
-        {
-            TillSoil(worldPos);
-        }
     }
 
     private void TillSoil(Vector2 worldPos)
@@ -58,7 +70,7 @@ public class FarmScene : MonoBehaviour, IGameScene
         CropRoot cropRoot = newCrop.GetComponent<CropRoot>();
         if (cropRoot != null)
         {
-            cropRoots.Add(cropRoot);
+            AddCrop(cropRoot);
         }
         else
         {
@@ -74,6 +86,18 @@ public class FarmScene : MonoBehaviour, IGameScene
             {
                 cropRoot.GrowFor(timeInMinutes);
             }
+        }
+    }
+    
+    private void AddCrop(CropRoot cropRoot)
+    {
+        if (!cropRoots.Contains(cropRoot))
+        {
+            cropRoots.Add(cropRoot);
+            if (cropGridManager.SnapToGrid(cropRoot.transform))
+            {
+                cropGridManager.UpdateGridValue(cropRoot.transform.position, (int)(cropRoot.IsSeeded() ? CropGridStatus.Seeded : CropGridStatus.Tilled));
+            }  
         }
     }
 

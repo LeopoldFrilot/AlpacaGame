@@ -69,7 +69,7 @@ public class InputHandler : MonoBehaviour
 
         if (found)
         {
-            checkForClickTimer = .2f;
+            checkForClickTimer = .1f;
         }
     }
 
