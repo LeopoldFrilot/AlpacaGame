@@ -47,3 +47,9 @@ TagManager:
   - name: UI
     uniqueID: 3623417231
     locked: 0
+  - name: Player
+    uniqueID: 1559565249
+    locked: 0
+  - name: Alpacas
+    uniqueID: 689545265
+    locked: 0

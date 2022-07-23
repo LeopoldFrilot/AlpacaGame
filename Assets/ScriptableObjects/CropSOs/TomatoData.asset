@@ -15,7 +15,8 @@ MonoBehaviour:
   cropType: 0
   timeToGrowOneRankInMinutes: 25
   growthSprites:
-  - {fileID: 21300000, guid: dad717e90ebdfd442be4b8064417e45b, type: 3}
-  - {fileID: 21300000, guid: 66560e269b7cca94f8569f22b9bae494, type: 3}
-  - {fileID: 21300000, guid: c89700a841e58e447989513044d420b1, type: 3}
-  - {fileID: 21300000, guid: df8da50ee8a1ff8418a685272a62ca54, type: 3}
+  - {fileID: 21300000, guid: 986d5e80a0b8b9348be41158a6e8226b, type: 3}
+  - {fileID: 21300000, guid: 73cd861f9e1136e45bcfbf8595db0f64, type: 3}
+  - {fileID: 21300000, guid: b61924a600a4a0d458f88f2e4ac12726, type: 3}
+  - {fileID: 21300000, guid: 00f643fc1e9408a4a8a1df1c5f5eb30b, type: 3}
+  - {fileID: 21300000, guid: e9bb3eb251ef05640b228f8c79880481, type: 3}

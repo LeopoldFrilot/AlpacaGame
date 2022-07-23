@@ -12,23 +12,30 @@ public class FarmScene : MonoBehaviour, IGameScene
     }
     
     [SerializeField] private GameObject cropPrefab;
-    [SerializeField] private List<NonInteractionZones> nonIntZones = new List<NonInteractionZones>();
+    [SerializeField] private List<NonInteractionZones> nonIntZones = new();
     
     public GridManager cropGridManager;
     public PomodoroManager pomodoroManager;
     
-    private List<CropRoot> cropRoots = new List<CropRoot>();
-    public SceneType GetSceneType()
-    {
-        return SceneType.Farm;
-    }
+    private List<CropRoot> cropRoots = new();
+    private bool initialized = false;
 
     public void Initialize()
     {
-        foreach (var cropRoot in FindObjectsOfType<CropRoot>())
+        if (!initialized)
         {
-            AddCrop(cropRoot);
+            foreach (var cell in cropGridManager.GetAllCells())
+            {
+                HandleClick(cropGridManager.GetWorldPosition(cell.x, cell.y, true));
+            }
+
+            initialized = true;
         }
+    }
+    
+    public SceneType GetSceneType()
+    {
+        return SceneType.Farm;
     }
 
     public void HandleClick(Vector2 worldPos)
