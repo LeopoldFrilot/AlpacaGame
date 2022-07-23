@@ -107,7 +107,7 @@ public class FarmScene : MonoBehaviour, IGameScene
 
     private void HarvestCrop(CropRoot crop)
     {
-        
+        cropGridManager.UpdateGridValue(crop.transform.position, (int)CropGridStatus.Tilled);
     }
 
     private void OnEnable()
