@@ -30,6 +30,11 @@ public class PomodoroManager : MonoBehaviour
         FB.LogTestEvent();
     }
 
+    public PomodoroState GetState()
+    {
+        return currentState;
+    }
+
     void Update()
     {
         if (!timerStopped)

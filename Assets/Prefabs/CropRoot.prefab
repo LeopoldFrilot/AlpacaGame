@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickCollider: {fileID: 4856857114537768121}
-  renderer: {fileID: 6283760196518121168}
+  cropRenderer: {fileID: 6283760196518121168}
   cropData: {fileID: 0}
   growthTime: 0
+  growthRank: 0

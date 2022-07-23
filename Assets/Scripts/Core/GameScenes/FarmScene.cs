@@ -15,6 +15,7 @@ public class FarmScene : MonoBehaviour, IGameScene
     [SerializeField] private List<NonInteractionZones> nonIntZones = new List<NonInteractionZones>();
     
     public GridManager cropGridManager;
+    public PomodoroManager pomodoroManager;
     
     private List<CropRoot> cropRoots = new List<CropRoot>();
     public SceneType GetSceneType()
@@ -32,6 +33,9 @@ public class FarmScene : MonoBehaviour, IGameScene
 
     public void HandleClick(Vector2 worldPos)
     {
+        if (pomodoroManager.GetState() == PomodoroState.Pomodoro)
+            return;
+        
         if (cropGridManager.ValidGridClick(worldPos))
         {
             foreach (var zone in nonIntZones)
@@ -49,7 +53,7 @@ public class FarmScene : MonoBehaviour, IGameScene
                     break;
                 
                 default:
-                    foreach (var crop in cropRoots)
+                    foreach (CropRoot crop in cropRoots)
                     {
                         if (crop.WouldBeClicked(worldPos))
                         {
@@ -101,13 +105,20 @@ public class FarmScene : MonoBehaviour, IGameScene
         }
     }
 
+    private void HarvestCrop(CropRoot crop)
+    {
+        
+    }
+
     private void OnEnable()
     {
         EventHub.OnPomodoroEnded += GrowCropsBy;
+        EventHub.OnCropHarvested += HarvestCrop;
     }
 
     private void OnDisable()
     {
         EventHub.OnPomodoroEnded -= GrowCropsBy;
+        EventHub.OnCropHarvested -= HarvestCrop;
     }
 }

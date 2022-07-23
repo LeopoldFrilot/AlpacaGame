@@ -11,18 +11,19 @@ public interface IClickable
 public class CropRoot : MonoBehaviour, IClickable
 {
     public Collider2D clickCollider;
-    public SpriteRenderer renderer;
+    public SpriteRenderer cropRenderer;
     
     [SerializeField] private CropSO cropData;
     [SerializeField] private float growthTime;
-
+    [SerializeField] private int growthRank;
+    
     public void GrowFor(float timeInMinutes)
     {
         growthTime += timeInMinutes;
-        int growthRank = Mathf.Clamp((int)growthTime / cropData.timeToGrowOneRankInMinutes, 0, cropData.growthSprites.Count * cropData.timeToGrowOneRankInMinutes);
+        growthRank = Mathf.Clamp((int)growthTime / cropData.timeToGrowOneRankInMinutes, 0, cropData.growthSprites.Count * cropData.timeToGrowOneRankInMinutes);
         if (growthRank < cropData.growthSprites.Count)
         {
-            renderer.sprite = cropData.growthSprites[growthRank];
+            cropRenderer.sprite = cropData.growthSprites[growthRank];
         }
     }
 
@@ -30,13 +31,26 @@ public class CropRoot : MonoBehaviour, IClickable
     {
         if (WouldBeClicked(clickLocation))
         {
-            // Planting seed
-            var seed = Player.Instance.selectedCropSeed;
-            if (seed != null)
+            if (!IsSeeded())
             {
-                cropData = seed;
-                growthTime = 0f;
-                GrowFor(0f);
+                // Planting seed
+                var seed = Player.Instance.selectedCropSeed;
+                if (seed != null)
+                {
+                    cropData = seed;
+                    growthTime = 0f;
+                    GrowFor(0f);
+                }
+            }
+            else
+            {
+                if (ReadyForHarvest())
+                {
+                    EventHub.TriggerCropHarvested(this);
+                    growthTime = 0;
+                    cropData = null;
+                    cropRenderer.sprite = null;
+                }
             }
         }
     }
@@ -49,5 +63,10 @@ public class CropRoot : MonoBehaviour, IClickable
     public bool IsSeeded()
     {
         return cropData != null;
+    }
+
+    public bool ReadyForHarvest()
+    {
+        return IsSeeded() && growthRank == cropData.growthSprites.Count - 1;
     }
 }
