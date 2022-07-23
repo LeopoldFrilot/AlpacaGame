@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9373247c7228f4cafe658c227514d9, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: 
+  splashScreenMusic: {fileID: 0}
+  splashScreenMusicVolume: 1
+  clickMenuSound: {fileID: 0}
+  clickMenuSoundVolume: 1
+  pomodoroStartSound: {fileID: 0}
+  pomodoroStartSoundVolume: 1
+  pomodoroEndSound: {fileID: 0}
+  pomodoroEndSoundVolume: 1
+  pomodoroFinishMusic: {fileID: 0}
+  pomodoroFinishMusicVolume: 1
+  breakStartSound: {fileID: 0}
+  breakStartSoundVolume: 1
+  breakEndSound: {fileID: 0}
+  breakEndSoundVolume: 1
+  alpacaHeartsSound: {fileID: 0}
+  alpacaHeartsSoundVolume: 1
+  shearingAlpacaSound: {fileID: 0}
+  shearingAlpacaSoundVolume: 1
