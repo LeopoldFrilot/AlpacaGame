@@ -19,7 +19,6 @@ public class GridManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Point: " + grid.GetXY(transform.position) + "Val = " + GetValue(transform.position));
         grid.DrawDebug(Color.white, Time.deltaTime);
     }
 
@@ -33,6 +32,11 @@ public class GridManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public List<Vector2Int> GetAllCells()
+    {
+        return grid.GetAllCells();
     }
 
     public void UpdateGridValue(Vector3 worldPos, int val)
@@ -75,5 +79,10 @@ public class GridManager : MonoBehaviour
             grid = new Grid(width, height, size, transform.position);
             grid.DrawDebug(debugColor, Time.deltaTime);
         }
+    }
+
+    public Vector2 GetWorldPosition(int cellX, int cellY, bool center)
+    {
+        return grid.GetWorldPosition(cellX, cellY, center);
     }
 }

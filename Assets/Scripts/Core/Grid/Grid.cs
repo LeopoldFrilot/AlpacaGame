@@ -89,4 +89,18 @@ public class Grid
     {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
+
+    public List<Vector2Int> GetAllCells()
+    {
+        List<Vector2Int> cells = new();
+        for (int x = 0; x < gridArray.GetLength(0); x++)
+        {
+            for (int y = 0; y < gridArray.GetLength(1); y++)
+            {
+                cells.Add(new Vector2Int(x, y));
+            }
+        }
+
+        return cells;
+    }
 }

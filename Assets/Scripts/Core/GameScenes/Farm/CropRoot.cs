@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public interface IClickable
 {
@@ -11,12 +12,19 @@ public interface IClickable
 public class CropRoot : MonoBehaviour, IClickable
 {
     public Collider2D clickCollider;
+    public SpriteRenderer dirtRenderer;
     public SpriteRenderer cropRenderer;
-    
-    [SerializeField] private CropSO cropData;
-    [SerializeField] private float growthTime;
-    [SerializeField] private int growthRank;
-    
+
+    [SerializeField] private GeneralCropSO genCropData;
+    private CropSO cropData;
+    private float growthTime;
+    private int growthRank;
+
+    private void Start()
+    {
+        dirtRenderer.sprite = genCropData.dirtSprites[Random.Range(0, genCropData.dirtSprites.Count - 1)];
+    }
+
     public void GrowFor(float timeInMinutes)
     {
         growthTime += timeInMinutes;
