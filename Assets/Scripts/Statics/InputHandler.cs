@@ -37,11 +37,6 @@ public class InputHandler : MonoBehaviour
 
     private float checkForClickTimer = 0f;
 
-    private void Start()
-    {
-        mainCamera = Camera.main;
-    }
-
     private void Update()
     {
         checkForClickTimer -= Time.deltaTime;
@@ -58,12 +53,12 @@ public class InputHandler : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            EventHub.TriggerOnClickDown(ConvertMouseScreenToWorld(touch.position));
+            EventHub.TriggerClickDown(ConvertMouseScreenToWorld(touch.position));
             found = true;
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            EventHub.TriggerOnClickDown(ConvertMouseScreenToWorld(Input.mousePosition));
+            EventHub.TriggerClickDown(ConvertMouseScreenToWorld(Input.mousePosition));
             found = true;
         }
 
@@ -75,6 +70,10 @@ public class InputHandler : MonoBehaviour
 
     private Vector3 ConvertMouseScreenToWorld(Vector3 pos)
     {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
         return mainCamera.ScreenToWorldPoint(pos);
     }
 }

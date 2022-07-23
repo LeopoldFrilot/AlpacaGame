@@ -28,7 +28,7 @@ public static class EventHub
     }
     
     public static event Action<Vector2> OnClickDown;
-    public static void TriggerOnClickDown(Vector2 clickLocation)
+    public static void TriggerClickDown(Vector2 clickLocation)
     {
         OnClickDown?.Invoke(clickLocation);
     }
@@ -37,5 +37,11 @@ public static class EventHub
     public static void TriggerPomodoroEnded(float originalTimeInMinutes)
     {
         OnPomodoroEnded?.Invoke(originalTimeInMinutes);
+    }
+
+    public static event Action<CropRoot> OnCropHarvested;
+    public static void TriggerCropHarvested(CropRoot crop)
+    {
+        OnCropHarvested?.Invoke(crop);
     }
 }

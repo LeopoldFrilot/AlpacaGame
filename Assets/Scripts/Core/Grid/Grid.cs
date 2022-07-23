@@ -18,18 +18,21 @@ public class Grid
         this.origin = origin;
 
         gridArray = new int[width, height];
+    }
 
+    public void DrawDebug(Color debugColor, float duration)
+    {
         for (int x = 0; x < gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < gridArray.GetLength(1); y++)
             {
-                Debug.DrawLine(GetWorldPosition(x,y), GetWorldPosition(x,y, true), Color.cyan, 100f);
-                Debug.DrawLine(GetWorldPosition(x,y), GetWorldPosition(x,y + 1), Color.white, 100f);
-                Debug.DrawLine(GetWorldPosition(x,y), GetWorldPosition(x+1,y), Color.white, 100f);
+                Debug.DrawLine(GetWorldPosition(x,y), GetWorldPosition(x,y,true), debugColor, duration);
+                Debug.DrawLine(GetWorldPosition(x,y), GetWorldPosition(x,y + 1), debugColor, duration);
+                Debug.DrawLine(GetWorldPosition(x,y), GetWorldPosition(x+1,y), debugColor, duration);
             }
         }
-        Debug.DrawLine(GetWorldPosition(0,height), GetWorldPosition(width, height), Color.white, 100f);
-        Debug.DrawLine(GetWorldPosition(width,0), GetWorldPosition(width, height), Color.white, 100f);
+        Debug.DrawLine(GetWorldPosition(0,height), GetWorldPosition(width, height), debugColor, duration);
+        Debug.DrawLine(GetWorldPosition(width,0), GetWorldPosition(width, height), debugColor, duration);
     }
 
     public Vector3 GetWorldPosition(int x, int y, bool center = false)
