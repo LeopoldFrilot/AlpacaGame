@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe41a5efb586eb4e9f6befb0c1fa1b1, type: 3}
+  m_Name: FarmData
+  m_EditorClassIdentifier: 
+  wateringSound: {fileID: 0}
+  wateringSoundVolume: 1
+  plantingSound: {fileID: 0}
+  plantingSoundVolume: 1
+  harvestingSound: {fileID: 0}
+  harvestingSoundVolume: 1
+  pickingWeedsSound: {fileID: 0}
+  pickingWeedsSoundVolume: 1
+  hoeingDirtSound: {fileID: 0}
+  hoeingDirtSoundVolume: 1
+  shearingAlpacaSound: {fileID: 0}
+  shearingAlpacaSoundVolume: 1

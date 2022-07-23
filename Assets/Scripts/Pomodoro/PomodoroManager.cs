@@ -3,19 +3,9 @@ using UnityEngine;
 public class PomodoroManager : MonoBehaviour
 {
     public TimerUIController timerUIController;
-
-    [Header("Sounds")]
-    [SerializeField] private AudioClip pomoStartSound;
-    [SerializeField][Range(0f,1f)] private float pomoStartSoundVolume;
-    [SerializeField] private AudioClip breakStartSound;
-    [SerializeField][Range(0f,1f)] private float breakStartSoundVolume;
-    [SerializeField] private AudioClip timerOverSound;
-    [SerializeField][Range(0f,1f)] private float timerOverSoundVolume;
-    
+    public GameSO gameData;
     [SerializeField] bool hasLimit;
     [SerializeField] float timerLimit;
-    
-    [SerializeField] 
 
     bool timerStopped = true;
 
@@ -42,11 +32,15 @@ public class PomodoroManager : MonoBehaviour
             currentTimeInSeconds -= Time.deltaTime;
             if (hasLimit && currentTimeInSeconds <= timerLimit)
             {
-                AudioHub.Instance.PlayClip(timerOverSound, timerOverSoundVolume);
                 timerStopped = true;
                 if (currentState == PomodoroState.Pomodoro)
                 {
+                    AudioHub.Instance.PlayClip(gameData.pomodoroEndSound, gameData.pomodoroEndSoundVolume);
                     EventHub.TriggerPomodoroEnded(startingTimeInMinutes);
+                }
+                else if (currentState == PomodoroState.Break)
+                {
+                    AudioHub.Instance.PlayClip(gameData.breakEndSound, gameData.breakEndSoundVolume);
                 }
                 UpdatePomoState();
             }
@@ -59,13 +53,13 @@ public class PomodoroManager : MonoBehaviour
     {
         if (currentState == PomodoroState.None || currentState == PomodoroState.Pomodoro)
         {
-            AudioHub.Instance.PlayClip(pomoStartSound, pomoStartSoundVolume);
-            StartNewCountdownTimer(timerUIController.GetPomodoroTimes().x, PomodoroState.Pomodoro); // Just 25 seconds for now
+            AudioHub.Instance.PlayClip(gameData.pomodoroStartSound, gameData.pomodoroEndSoundVolume);
+            StartNewCountdownTimer(timerUIController.GetPomodoroTimes().x, PomodoroState.Pomodoro);
         }
         else if (currentState == PomodoroState.Break)
         {
-            AudioHub.Instance.PlayClip(breakStartSound, breakStartSoundVolume);
-            StartNewCountdownTimer(timerUIController.GetPomodoroTimes().y, PomodoroState.Break); // Just 5 seconds for now
+            AudioHub.Instance.PlayClip(gameData.breakStartSound, gameData.breakStartSoundVolume);
+            StartNewCountdownTimer(timerUIController.GetPomodoroTimes().y, PomodoroState.Break);
         }
     }
     

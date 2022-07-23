@@ -1,13 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] private AudioClip switchSceneSound;
-    [SerializeField][Range(0f, 1f)] private float switchSceneSoundVolume = 1f;
-    [SerializeField] private AudioClip quitSound;
-    [SerializeField][Range(0f, 1f)] private float quitSoundVolume = 1f;
+    public GameSO gameData;
     
     #region Singleton
     private static SceneController _instance;
@@ -44,31 +40,31 @@ public class SceneController : MonoBehaviour
 
     public void LoadNextScene()
     {
-        AudioHub.Instance.PlayClip(switchSceneSound, switchSceneSoundVolume);
+        AudioHub.Instance.PlayClip(gameData.clickMenuSound, gameData.clickMenuSoundVolume);
         SceneManager.LoadScene(GetActiveSceneIndex() + 1);
     }
 
     public void LoadSplashScene()
     {
-        AudioHub.Instance.PlayClip(quitSound, quitSoundVolume);
+        AudioHub.Instance.PlayClip(gameData.clickMenuSound, gameData.clickMenuSoundVolume);
         SceneManager.LoadScene(0);
     }
 
     public void LoadScene(int buildIndex)
     {
-        AudioHub.Instance.PlayClip(switchSceneSound, switchSceneSoundVolume);
+        AudioHub.Instance.PlayClip(gameData.clickMenuSound, gameData.clickMenuSoundVolume);
         SceneManager.LoadScene(buildIndex);
     }
 
     public void RestartScene()
     {
-        AudioHub.Instance.PlayClip(switchSceneSound, switchSceneSoundVolume);
+        AudioHub.Instance.PlayClip(gameData.clickMenuSound, gameData.clickMenuSoundVolume);
         SceneManager.LoadScene(GetActiveSceneIndex());
     }
 
     public void Quit()
     {
-        AudioHub.Instance.PlayClip(quitSound, quitSoundVolume);
+        AudioHub.Instance.PlayClip(gameData.clickMenuSound, gameData.clickMenuSoundVolume);
         Application.Quit();
     }
 }
