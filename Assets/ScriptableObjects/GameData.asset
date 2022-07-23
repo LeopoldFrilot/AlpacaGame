@@ -14,19 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splashScreenMusic: {fileID: 0}
   splashScreenMusicVolume: 1
-  clickMenuSound: {fileID: 0}
-  clickMenuSoundVolume: 1
-  pomodoroStartSound: {fileID: 0}
-  pomodoroStartSoundVolume: 1
-  pomodoroEndSound: {fileID: 0}
-  pomodoroEndSoundVolume: 1
+  clickMenuSound: {fileID: 8300000, guid: 4a8d1624e1a71314cab18ca27a920261, type: 3}
+  clickMenuSoundVolume: 0.5
+  pomodoroStartSound: {fileID: 8300000, guid: b9cb19b9c9eba554eb6836b80a1a038c, type: 3}
+  pomodoroStartSoundVolume: 0.5
+  pomodoroEndSound: {fileID: 8300000, guid: ecd38c9c3cab4624f812a28d7509d437, type: 3}
+  pomodoroEndSoundVolume: 0.5
   pomodoroFinishMusic: {fileID: 0}
-  pomodoroFinishMusicVolume: 1
-  breakStartSound: {fileID: 0}
-  breakStartSoundVolume: 1
-  breakEndSound: {fileID: 0}
-  breakEndSoundVolume: 1
-  alpacaHeartsSound: {fileID: 0}
-  alpacaHeartsSoundVolume: 1
-  shearingAlpacaSound: {fileID: 0}
-  shearingAlpacaSoundVolume: 1
+  pomodoroFinishMusicVolume: 0.5
+  breakStartSound: {fileID: 8300000, guid: b9cb19b9c9eba554eb6836b80a1a038c, type: 3}
+  breakStartSoundVolume: 0.5
+  breakEndSound: {fileID: 8300000, guid: ecd38c9c3cab4624f812a28d7509d437, type: 3}
+  breakEndSoundVolume: 0.5
