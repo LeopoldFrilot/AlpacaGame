@@ -18,8 +18,10 @@ public class TimerUIController : MonoBehaviour
     [SerializeField] private TMP_Dropdown dropdownBreak;
 
     [Header("FormatSettings")]
-    [SerializeField] bool hasFormat;
-    [SerializeField] TimerFormats format;
+    [SerializeField] private bool hasFormat;
+    [SerializeField] private TimerFormats format;
+    [SerializeField] private Color defaultTimerTextColor = Color.white;
+    [SerializeField] private Color finishedTimerTextColor = Color.red;
     
     //timerFormats is an object that controls the format once its selected
     private Dictionary<TimerFormats, string> timerFormats = new Dictionary<TimerFormats, string>();
@@ -44,12 +46,12 @@ public class TimerUIController : MonoBehaviour
         SetTimerText(time);
         if (isFinished)
         {
-            timerText.color = Color.red;
+            timerText.color = finishedTimerTextColor;
             button.interactable = true;
         }
         else
         {
-            timerText.color = Color.black;
+            timerText.color = defaultTimerTextColor;
             button.interactable = false;
         }
     }
@@ -58,8 +60,8 @@ public class TimerUIController : MonoBehaviour
     {
         //if user wants a format with their time, go for it. else, do the default
         int minutes = (int)currentTime / 60;
-        float seconds = currentTime - minutes * 60;
-        timerText.text = minutes + ":" + (hasFormat ? seconds.ToString(timerFormats[format]) : seconds.ToString());
+        int seconds = (int)(currentTime - minutes * 60);
+        timerText.text = minutes + ":" + (seconds < 10 ? "0" : "") + (hasFormat ? seconds.ToString(timerFormats[format]) : seconds.ToString());
     }
 
     private void UpdatePomoMode(PomodoroState state)
@@ -67,7 +69,7 @@ public class TimerUIController : MonoBehaviour
         if (state == PomodoroState.None)
         {
             buttonText.text = "Start!";
-            button.image.color = Color.black;
+            button.image.color = Color.red;
         }
         else if (state == PomodoroState.Break)
         {
