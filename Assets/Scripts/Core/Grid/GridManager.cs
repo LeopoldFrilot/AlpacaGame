@@ -59,7 +59,11 @@ public class GridManager : MonoBehaviour
 
     private void DebugGridCell(Vector2 pos)
     {
-        Debug.Log(grid.GetXY(pos));
+        var convertedPos = grid.GetXY(pos);
+        if (convertedPos.x >= 0)
+        {
+            Debug.Log(convertedPos);
+        }
     }
 
     private void OnEnable()

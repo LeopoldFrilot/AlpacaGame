@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    private CropSO selectedCropSeed;
+    [SerializeField] private CropSO selectedCropSeed;
     private GameplayManager gameplayManager;
 
     private void HandleClickDown(Vector2 worldPos)

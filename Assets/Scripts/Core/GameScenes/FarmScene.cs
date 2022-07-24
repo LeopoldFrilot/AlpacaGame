@@ -13,8 +13,8 @@ public class FarmScene : MonoBehaviour, IGameScene
     
     [SerializeField] private GameObject cropPrefab;
     [SerializeField] private List<NonInteractionZones> nonIntZones = new();
-    
-    public GridManager cropGridManager;
+
+    public List<GridManager> cropGridManagers = new();
     public PomodoroManager pomodoroManager;
     
     private List<CropRoot> cropRoots = new();
@@ -24,9 +24,12 @@ public class FarmScene : MonoBehaviour, IGameScene
     {
         if (!initialized)
         {
-            foreach (var cell in cropGridManager.GetAllCells())
+            foreach (var cropGridManager in cropGridManagers)
             {
-                HandleClick(cropGridManager.GetWorldPosition(cell.x, cell.y, true));
+                foreach (var cell in cropGridManager.GetAllCells())
+                {
+                    HandleClick(cropGridManager.GetWorldPosition(cell.x, cell.y, true));
+                }
             }
 
             initialized = true;
@@ -43,36 +46,38 @@ public class FarmScene : MonoBehaviour, IGameScene
         if (pomodoroManager.GetState() == PomodoroState.Pomodoro)
             return;
         
-        if (cropGridManager.ValidGridClick(worldPos))
+        foreach (var cropGridManager in cropGridManagers)
         {
-            foreach (var zone in nonIntZones)
+            if (cropGridManager.ValidGridClick(worldPos))
             {
-                if (zone.collider != null && zone.gameObject.activeSelf && zone.collider.bounds.Contains(worldPos))
+                foreach (var zone in nonIntZones)
                 {
-                    return;
+                    if (zone.collider != null && zone.gameObject.activeSelf && zone.collider.bounds.Contains(worldPos))
+                    {
+                        return;
+                    }
+                }
+            
+                switch ((CropGridStatus)cropGridManager.GetValue(worldPos))
+                {
+                    case CropGridStatus.Null:
+                        TillSoil(worldPos);
+                        break;
+                
+                    default:
+                        foreach (CropRoot crop in cropRoots)
+                        {
+                            if (crop.WouldBeClicked(worldPos))
+                            {      
+                                crop.HandleClickDown(worldPos);
+                                cropGridManager.UpdateGridValue(worldPos, (int)(crop.IsSeeded() ? CropGridStatus.Seeded : CropGridStatus.Tilled));
+                                break;
+                            }
+                        }
+                        break;
                 }
             }
-            
-            switch ((CropGridStatus)cropGridManager.GetValue(worldPos))
-            {
-                case CropGridStatus.Null:
-                    TillSoil(worldPos);
-                    break;
-                
-                default:
-                    foreach (CropRoot crop in cropRoots)
-                    {
-                        if (crop.WouldBeClicked(worldPos))
-                        {
-                            crop.HandleClickDown(worldPos);
-                            cropGridManager.UpdateGridValue(worldPos, (int)(crop.IsSeeded() ? CropGridStatus.Seeded : CropGridStatus.Tilled));
-                            break;
-                        }
-                    }
-                    break;
-            }
         }
-        
     }
 
     private void TillSoil(Vector2 worldPos)
@@ -105,16 +110,22 @@ public class FarmScene : MonoBehaviour, IGameScene
         if (!cropRoots.Contains(cropRoot))
         {
             cropRoots.Add(cropRoot);
-            if (cropGridManager.SnapToGrid(cropRoot.transform))
+            foreach (var cropGridManager in cropGridManagers)
             {
-                cropGridManager.UpdateGridValue(cropRoot.transform.position, (int)(cropRoot.IsSeeded() ? CropGridStatus.Seeded : CropGridStatus.Tilled));
-            }  
+                if (cropGridManager.SnapToGrid(cropRoot.transform))
+                {
+                    cropGridManager.UpdateGridValue(cropRoot.transform.position, (int)(cropRoot.IsSeeded() ? CropGridStatus.Seeded : CropGridStatus.Tilled));
+                } 
+            } 
         }
     }
 
     private void HarvestCrop(CropRoot crop)
     {
-        cropGridManager.UpdateGridValue(crop.transform.position, (int)CropGridStatus.Tilled);
+        foreach (var cropGridManager in cropGridManagers)
+        {
+            cropGridManager.UpdateGridValue(crop.transform.position, (int)CropGridStatus.Tilled);
+        }
     }
 
     private void OnEnable()
