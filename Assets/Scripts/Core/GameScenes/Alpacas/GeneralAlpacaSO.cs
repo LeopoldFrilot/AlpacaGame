@@ -5,9 +5,9 @@ using UnityEngine;
 public class GeneralAlpacaSO : ScriptableObject
 {
     public AudioClip walkSound;
-    [Range(0,1)] public float walkSoundVolume = 1;
+    [Range(0,1)] public float walkSoundVolume = .5f;
     public AudioClip alpacaHeartsSound;
-    [Range(0,1)] public float alpacaHeartsSoundVolume = 1;
+    [Range(0,1)] public float alpacaHeartsSoundVolume = .5f;
     public AudioClip shearingAlpacaSound;
-    [Range(0,1)] public float shearingAlpacaSoundVolume = 1;
+    [Range(0,1)] public float shearingAlpacaSoundVolume = .5f;
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   walkSound: {fileID: 0}
-  walkSoundVolume: 1
+  walkSoundVolume: 0.5

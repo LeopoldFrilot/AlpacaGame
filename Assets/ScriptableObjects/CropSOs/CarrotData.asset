@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31c0f59441df11644a08da6e151fc9be, type: 3}
+  m_Name: CarrotData
+  m_EditorClassIdentifier: 
+  cropType: 1
+  timeToGrowOneRankInMinutes: 50
+  growthSprites:
+  - {fileID: 21300000, guid: 30e8aabb1bc717c4baadf733375a8f41, type: 3}
+  - {fileID: 21300000, guid: 458a8c89ace992a4c871342247e8aec8, type: 3}
+  - {fileID: 21300000, guid: 357cc7cd268e33549a549b791f461867, type: 3}
+  - {fileID: 21300000, guid: 7b691ff34755c8549a311646d6cfe8c8, type: 3}
+  - {fileID: 21300000, guid: 284e4a7800111574aaadbc45fb2ed491, type: 3}

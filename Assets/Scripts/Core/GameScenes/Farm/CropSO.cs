@@ -8,7 +8,10 @@ public class CropSO : ScriptableObject
 {
     public enum CropType
     {
-        Tomato
+        Tomato,
+        Carrot,
+        Potato,
+        Wheat
     }
 
     public CropType cropType;

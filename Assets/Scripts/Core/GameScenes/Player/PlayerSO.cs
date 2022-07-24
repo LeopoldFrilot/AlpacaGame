@@ -5,5 +5,5 @@ using UnityEngine;
 public class PlayerSO : ScriptableObject
 {
     public AudioClip walkSound;
-    [Range(0,1)] public float walkSoundVolume = 1;
+    [Range(0,1)] public float walkSoundVolume = .5f;
 }
