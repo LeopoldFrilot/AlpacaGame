@@ -42,7 +42,7 @@ public class CropRoot : MonoBehaviour, IClickable
             if (!IsSeeded())
             {
                 // Planting seed
-                var seed = Player.Instance.selectedCropSeed;
+                var seed = Player.Instance.GetSelectedCropSeed();
                 if (seed != null)
                 {
                     cropData = seed;
