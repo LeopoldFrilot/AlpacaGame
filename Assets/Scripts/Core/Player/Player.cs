@@ -34,9 +34,8 @@ public class Player : MonoBehaviour
         }
     }
     #endregion
-    
-    public CropSO selectedCropSeed;
-    
+
+    private CropSO selectedCropSeed;
     private GameplayManager gameplayManager;
 
     private void HandleClickDown(Vector2 worldPos)
@@ -59,6 +58,16 @@ public class Player : MonoBehaviour
         }
 
         return gameplayManager;
+    }
+
+    public CropSO GetSelectedCropSeed()
+    {
+        return selectedCropSeed;
+    }
+
+    public void SelecCropSeed(CropSO cropSO)
+    {
+        selectedCropSeed = cropSO;
     }
 
     private void OnEnable()
