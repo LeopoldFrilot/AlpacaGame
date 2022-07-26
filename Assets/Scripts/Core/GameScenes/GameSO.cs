@@ -7,19 +7,19 @@ public class GameSO : ScriptableObject
 {
     [Header("UI")]
     public AudioClip splashScreenMusic;
-    [Range(0,1)] public float splashScreenMusicVolume = 1;
+    [Range(0,1)] public float splashScreenMusicVolume = .5f;
     public AudioClip clickMenuSound;
-    [Range(0,1)] public float clickMenuSoundVolume = 1;
+    [Range(0,1)] public float clickMenuSoundVolume = .5f;
     
     [Header("Pomodoro")]
     public AudioClip pomodoroStartSound;
-    [Range(0,1)] public float pomodoroStartSoundVolume = 1;
+    [Range(0,1)] public float pomodoroStartSoundVolume = .5f;
     public AudioClip pomodoroEndSound;
-    [Range(0,1)] public float pomodoroEndSoundVolume = 1;
+    [Range(0,1)] public float pomodoroEndSoundVolume = .5f;
     public AudioClip pomodoroFinishMusic;
-    [Range(0,1)] public float pomodoroFinishMusicVolume = 1;
+    [Range(0,1)] public float pomodoroFinishMusicVolume = .5f;
     public AudioClip breakStartSound;
-    [Range(0,1)] public float breakStartSoundVolume = 1;
+    [Range(0,1)] public float breakStartSoundVolume = .5f;
     public AudioClip breakEndSound;
-    [Range(0,1)] public float breakEndSoundVolume = 1;
+    [Range(0,1)] public float breakEndSoundVolume = .5f;
 }

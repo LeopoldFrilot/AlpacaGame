@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -35,7 +36,8 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private CropSO selectedCropSeed;
+    [SerializeField] private CropSO[] randomCropSeeds;
+    private CropSO selectedCropSeed;
     private GameplayManager gameplayManager;
 
     private void HandleClickDown(Vector2 worldPos)
@@ -62,7 +64,8 @@ public class Player : MonoBehaviour
 
     public CropSO GetSelectedCropSeed()
     {
-        return selectedCropSeed;
+        //return selectedCropSeed;
+        return randomCropSeeds[Random.Range(0, randomCropSeeds.Length - 1)];
     }
 
     public void SelecCropSeed(CropSO cropSO)

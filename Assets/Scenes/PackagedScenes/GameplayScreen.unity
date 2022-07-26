@@ -13920,6 +13920,26 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.0000012665987
       objectReference: {fileID: 0}
+    - target: {fileID: 9092475532667596499, guid: 36c4678e8f9af8c468cd62e614589347, type: 3}
+      propertyPath: randomCropSeeds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9092475532667596499, guid: 36c4678e8f9af8c468cd62e614589347, type: 3}
+      propertyPath: randomCropSeeds.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: e731f4791cda0e741b6d82d7c128d20f, type: 2}
+    - target: {fileID: 9092475532667596499, guid: 36c4678e8f9af8c468cd62e614589347, type: 3}
+      propertyPath: randomCropSeeds.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54ea3b06dedf3b04fb7b44cd0d180370, type: 2}
+    - target: {fileID: 9092475532667596499, guid: 36c4678e8f9af8c468cd62e614589347, type: 3}
+      propertyPath: randomCropSeeds.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b63763b9a3cbba4db62d25211926b99, type: 2}
+    - target: {fileID: 9092475532667596499, guid: 36c4678e8f9af8c468cd62e614589347, type: 3}
+      propertyPath: randomCropSeeds.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7fbbf0e1635b6e2428294d004d7a57bb, type: 2}
     - target: {fileID: 9092475533812366121, guid: 36c4678e8f9af8c468cd62e614589347, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9999709

@@ -7,17 +7,17 @@ public class FarmSO : ScriptableObject
 {
     [Header("Farming")]
     public AudioClip wateringSound;
-    [Range(0,1)] public float wateringSoundVolume = 1;
+    [Range(0,1)] public float wateringSoundVolume = .5f;
     public AudioClip plantingSound;
-    [Range(0,1)] public float plantingSoundVolume = 1;
+    [Range(0,1)] public float plantingSoundVolume = .5f;
     public AudioClip harvestingSound;
-    [Range(0,1)] public float harvestingSoundVolume = 1;
+    [Range(0,1)] public float harvestingSoundVolume = .5f;
     public AudioClip pickingWeedsSound;
-    [Range(0,1)] public float pickingWeedsSoundVolume = 1;
+    [Range(0,1)] public float pickingWeedsSoundVolume = .5f;
     public AudioClip hoeingDirtSound;
-    [Range(0,1)] public float hoeingDirtSoundVolume = 1;
+    [Range(0,1)] public float hoeingDirtSoundVolume = .5f;
     
     [Header("Ambience")]
     public AudioClip ambientSound;
-    [Range(0,1)] public float ambientSoundVolume = 1;
+    [Range(0,1)] public float ambientSoundVolume = .5f;
 }

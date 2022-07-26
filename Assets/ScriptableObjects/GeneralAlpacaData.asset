@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GeneralAlpacaData
   m_EditorClassIdentifier: 
   walkSound: {fileID: 0}
-  walkSoundVolume: 1
+  walkSoundVolume: 0.5
   alpacaHeartsSound: {fileID: 0}
-  alpacaHeartsSoundVolume: 1
+  alpacaHeartsSoundVolume: 0.5
   shearingAlpacaSound: {fileID: 0}
-  shearingAlpacaSoundVolume: 1
+  shearingAlpacaSoundVolume: 0.5

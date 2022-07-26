@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   splashScreenMusic: {fileID: 0}
-  splashScreenMusicVolume: 1
+  splashScreenMusicVolume: 0.5
   clickMenuSound: {fileID: 8300000, guid: 4a8d1624e1a71314cab18ca27a920261, type: 3}
   clickMenuSoundVolume: 0.5
   pomodoroStartSound: {fileID: 8300000, guid: b9cb19b9c9eba554eb6836b80a1a038c, type: 3}
