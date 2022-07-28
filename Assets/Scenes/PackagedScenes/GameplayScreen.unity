@@ -3880,7 +3880,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: f4c146e19f2cd3f4fb0cba7609486753, type: 3}
       propertyPath: m_Name
-      value: BrownAlpacaFront (2)
+      value: PETBrownAlpacaFront (2)
       objectReference: {fileID: 0}
     - target: {fileID: -8250169266279454816, guid: f4c146e19f2cd3f4fb0cba7609486753, type: 3}
       propertyPath: m_SortingLayer
