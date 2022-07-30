@@ -16,7 +16,8 @@ public class FarmSO : ScriptableObject
     [Range(0,1)] public float pickingWeedsSoundVolume = .5f;
     public AudioClip hoeingDirtSound;
     [Range(0,1)] public float hoeingDirtSoundVolume = .5f;
-    
+    public AudioClip packingDirtSound;
+    [Range(0, 1)] public float packingDirtSoundVolume = .5f;
     [Header("Ambience")]
     public AudioClip ambientSound;
     [Range(0,1)] public float ambientSoundVolume = .5f;
