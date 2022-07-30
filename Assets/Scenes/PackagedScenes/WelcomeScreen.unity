@@ -156,7 +156,7 @@ RectTransform:
   m_Children:
   - {fileID: 984953003}
   m_Father: {fileID: 3739187434986965249}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -257,23 +257,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192486419}
   m_CullTransparentMesh: 1
---- !u!1 &234617297 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3437157143518792387, guid: e679f9d2faad62d47a8a7754d1ab1f26, type: 3}
-  m_PrefabInstance: {fileID: 3437157144382518307}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &234617302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234617297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f59e16bb7ce0b54d8b8b787580f05df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &984953002
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,7 +474,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2288443235283814347
 PrefabInstance:
@@ -502,7 +485,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2288443234579237968, guid: 417bbc758d7dbbd4c979780336a4455a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2288443234579237968, guid: 417bbc758d7dbbd4c979780336a4455a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -672,7 +655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3739187435725045266, guid: e09eb7af854e52d41997bdbea690614c, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3739187435725045266, guid: e09eb7af854e52d41997bdbea690614c, type: 3}
       propertyPath: m_AnchorMax.x

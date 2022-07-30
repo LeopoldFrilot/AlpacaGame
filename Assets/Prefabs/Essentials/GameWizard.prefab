@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4195183122999168897}
   - component: {fileID: 3437157143518792384}
   - component: {fileID: 3437157143518792385}
-  - component: {fileID: 7261915694124490246}
   - component: {fileID: 542218205}
   m_Layer: 0
   m_Name: GameWizard
@@ -145,18 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicPlayer: {fileID: 3437157143533593783}
---- !u!114 &7261915694124490246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3437157143518792387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56776fe5d6c832f4692a1aeba944817f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &542218205
 MonoBehaviour:
   m_ObjectHideFlags: 0
