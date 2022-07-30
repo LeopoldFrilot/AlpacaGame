@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff08e5d6fecce6047b2b95bca5d05479, type: 3}
-  m_Name: AlpacaStats
+  m_Name: TestAlpacaStats
   m_EditorClassIdentifier: 

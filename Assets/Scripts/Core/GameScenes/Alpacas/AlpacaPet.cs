@@ -2,35 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// public interface IClickable
-// {
-//     void HandleClickDown(Vector2 clickLocation);
-//     //bool WouldBeClicked(Vector2 clickLocation);
-// }
-
-public class AlpacaPet : MonoBehaviour
+public class AlpacaPet : MonoBehaviour, IClickable
 {
     public Collider2D clickCollider;
-    private AlpacaStatsSO alpacaStat;
+    private int alpacaLove;
     
     private void Start()
     {
-        //set love stat to 0? idk
+        alpacaLove = 0;
     }
 
     public void HandleClickDown(Vector2 clickLocation)
     {
-        // if (WouldBeClicked(clickLocation))
-        // {
+        if (WouldBeClicked(clickLocation))
+        {
             //love stat goes up by X
             //when dude is clicked
-            alpacaStat.loveStat++;
-        //}
+            alpacaLove++;
+            Debug.Log("Alpaca " + gameObject.name + " love: " + alpacaLove);
+        }
     }
 
-    // public bool WouldBeClicked(Vector2 clickLocation)
-    // {
-    //     return clickCollider.bounds.Contains(clickLocation);
-    // }
+    public bool WouldBeClicked(Vector2 clickLocation)
+    {
+        return clickCollider.bounds.Contains(clickLocation);
+    }
+
+    private void OnEnable()
+    {
+        EventHub.OnClickDown += HandleClickDown;
+    }
+
+    private void OnDisable()
+    {
+        EventHub.OnClickDown -= HandleClickDown;
+    }
 
 }
