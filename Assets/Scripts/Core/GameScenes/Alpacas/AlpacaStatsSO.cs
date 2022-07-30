@@ -23,5 +23,8 @@ public class AlpacaStatsSO : ScriptableObject
         Uncanny
     }
 
+    [FormerlySerializedAs("loveStat")] public int loveStat;
+    
+
 
 }
