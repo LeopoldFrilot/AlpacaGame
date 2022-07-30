@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
-    
     #region Singleton
     private static Player _instance;
     public static Player Instance
@@ -33,12 +31,25 @@ public class Player : MonoBehaviour
         {
             _instance = this;
         }
+        NonSingletonAwake();
     }
     #endregion
 
-    [SerializeField] private CropSO[] randomCropSeeds;
+    private PlayerStats playerStats;
+
     private CropSO selectedCropSeed;
     private GameplayManager gameplayManager;
+
+    private void NonSingletonAwake()
+    {
+        playerStats = new PlayerStats(500, 15, 10, 4);
+    }
+
+    private void Start()
+    {
+        EventHub.TriggerCoinsCountChanged(playerStats.coins);
+        EventHub.TriggerSolesCountChanged(playerStats.soles);
+    }
 
     private void HandleClickDown(Vector2 worldPos)
     {
@@ -52,6 +63,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public int GetSeedCount(CropSO.CropType cropType)
+    {
+        return playerStats.GetSeedCount(cropType);
+    }
+
     public GameplayManager GetGameplayManager()
     {
         if (gameplayManager == null)
@@ -62,24 +78,52 @@ public class Player : MonoBehaviour
         return gameplayManager;
     }
 
-    public CropSO GetSelectedCropSeed()
+    public void ChangeSeedCount(CropSO seed, int v)
     {
-        //return selectedCropSeed;
-        return randomCropSeeds[Random.Range(0, randomCropSeeds.Length - 1)];
+        playerStats.ChangeSeedCount(seed.cropType, v);
+        EventHub.TriggerCropSeedCountChanged(seed);
     }
 
-    public void SelecCropSeed(CropSO cropSO)
+    public CropSO GetSelectedCropSeed()
     {
-        selectedCropSeed = cropSO;
+        return selectedCropSeed;
+    }
+
+    public void CoinChange(int delta)
+    {
+        playerStats.coins += delta;
+        EventHub.TriggerCoinsCountChanged(playerStats.coins);
+    }
+
+    public void SolesChange(int delta)
+    {
+        playerStats.soles += delta;
+        EventHub.TriggerSolesCountChanged(playerStats.soles);
+    }
+
+    private void UpdateCropseedSelection(CropSO cropSeed)
+    {
+        selectedCropSeed = cropSeed;
+    }
+
+    private void UpdateCropsHarvested(CropRoot crop)
+    {
+        playerStats.HarvestCrop(crop.GetCropType(), 1);
     }
 
     private void OnEnable()
     {
         EventHub.OnClickDown += HandleClickDown;
+        EventHub.OnCropHarvested += UpdateCropsHarvested;
+        EventHub.OnCropSeedSelected += UpdateCropseedSelection;
+        EventHub.OnPomodoroEnded += SolesChange;
     }
     
     private void OnDisable()
     {
         EventHub.OnClickDown -= HandleClickDown;
+        EventHub.OnCropHarvested -= UpdateCropsHarvested;
+        EventHub.OnCropSeedSelected -= UpdateCropseedSelection;
+        EventHub.OnPomodoroEnded -= SolesChange;
     }
 }

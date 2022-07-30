@@ -28,7 +28,7 @@ public class CropRoot : MonoBehaviour, IClickable
     public void GrowFor(float timeInMinutes)
     {
         growthTime += timeInMinutes;
-        growthRank = Mathf.Clamp((int)growthTime / cropData.timeToGrowOneRankInMinutes, 0, cropData.growthSprites.Count * cropData.timeToGrowOneRankInMinutes);
+        growthRank = Mathf.Clamp((int)growthTime / cropData.timeToGrowOneRankInMinutes, 0, cropData.growthSprites.Count - 1);
         if (growthRank < cropData.growthSprites.Count)
         {
             cropRenderer.sprite = cropData.growthSprites[growthRank];
@@ -43,11 +43,12 @@ public class CropRoot : MonoBehaviour, IClickable
             {
                 // Planting seed
                 var seed = Player.Instance.GetSelectedCropSeed();
-                if (seed != null)
+                if (seed != null && Player.Instance.GetSeedCount(seed.cropType) > 0)
                 {
                     cropData = seed;
                     growthTime = 0f;
                     GrowFor(0f);
+                    Player.Instance.ChangeSeedCount(seed, -1);
                 }
             }
             else
@@ -55,12 +56,20 @@ public class CropRoot : MonoBehaviour, IClickable
                 if (ReadyForHarvest())
                 {
                     EventHub.TriggerCropHarvested(this);
+                    Player.Instance.ChangeSeedCount(cropData, 1);
+                    Player.Instance.CoinChange(cropData.cropType == CropSO.CropType.Wheat ? 25 : 500);
+                    EventHub.TriggerCropSeedCountChanged(cropData);
                     growthTime = 0;
                     cropData = null;
                     cropRenderer.sprite = null;
                 }
             }
         }
+    }
+
+    public CropSO.CropType GetCropType()
+    {
+        return cropData.cropType;
     }
 
     public bool WouldBeClicked(Vector2 clickLocation)

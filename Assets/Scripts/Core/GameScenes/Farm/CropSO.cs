@@ -11,7 +11,10 @@ public class CropSO : ScriptableObject
         Tomato,
         Carrot,
         Potato,
-        Wheat
+        Wheat,
+
+        // ALL NEW CROPS SHOULD GO ABOVE COUNT AND ORDER SHOULD NOT CHANGE
+        Count
     }
 
     public CropType cropType;
