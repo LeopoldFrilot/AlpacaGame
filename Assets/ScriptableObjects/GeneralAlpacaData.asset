@@ -16,5 +16,5 @@ MonoBehaviour:
   walkSoundVolume: 0.5
   alpacaHeartsSound: {fileID: 0}
   alpacaHeartsSoundVolume: 0.5
-  shearingAlpacaSound: {fileID: 0}
+  shearingAlpacaSound: {fileID: 8300000, guid: b4deeb325b65fcc4abaab7720afc68ab, type: 3}
   shearingAlpacaSoundVolume: 0.5
