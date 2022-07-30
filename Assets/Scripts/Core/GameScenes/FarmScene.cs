@@ -94,7 +94,7 @@ public class FarmScene : MonoBehaviour, IGameScene
         }
     }
 
-    private void GrowCropsBy(float timeInMinutes)
+    private void GrowCropsBy(int timeInMinutes)
     {
         foreach (var cropRoot in cropRoots)
         {

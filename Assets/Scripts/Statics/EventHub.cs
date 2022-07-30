@@ -33,8 +33,8 @@ public static class EventHub
         OnClickDown?.Invoke(clickLocation);
     }
     
-    public static event Action<float> OnPomodoroEnded;
-    public static void TriggerPomodoroEnded(float originalTimeInMinutes)
+    public static event Action<int> OnPomodoroEnded;
+    public static void TriggerPomodoroEnded(int originalTimeInMinutes)
     {
         OnPomodoroEnded?.Invoke(originalTimeInMinutes);
     }
@@ -43,5 +43,29 @@ public static class EventHub
     public static void TriggerCropHarvested(CropRoot crop)
     {
         OnCropHarvested?.Invoke(crop);
+    }
+
+    public static event Action<CropSO> OnCropSeedSelected;
+    public static void TriggerCropSeedSelected(CropSO crop)
+    {
+        OnCropSeedSelected?.Invoke(crop);
+    }
+
+    public static event Action<CropSO> OnCropSeedCountChanged;
+    public static void TriggerCropSeedCountChanged(CropSO crop)
+    {
+        OnCropSeedCountChanged?.Invoke(crop);
+    }
+
+    public static event Action<int> OnSolesCountChanged;
+    public static void TriggerSolesCountChanged(int newValue)
+    {
+        OnSolesCountChanged?.Invoke(newValue);
+    }
+
+    public static event Action<int> OnCoinsCountChanged;
+    public static void TriggerCoinsCountChanged(int newValue)
+    {
+        OnCoinsCountChanged?.Invoke(newValue);
     }
 }

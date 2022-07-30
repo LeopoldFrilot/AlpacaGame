@@ -36,7 +36,7 @@ public class PomodoroManager : MonoBehaviour
                 if (currentState == PomodoroState.Pomodoro)
                 {
                     AudioHub.Instance.PlayClip(gameData.pomodoroEndSound, gameData.pomodoroEndSoundVolume);
-                    EventHub.TriggerPomodoroEnded(startingTimeInMinutes);
+                    EventHub.TriggerPomodoroEnded((int)startingTimeInMinutes);
                 }
                 else if (currentState == PomodoroState.Break)
                 {

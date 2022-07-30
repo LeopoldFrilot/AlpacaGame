@@ -7,30 +7,66 @@ using UnityEngine;
 public class PlayerDataUI : MonoBehaviour
 {
     public GameObject PlayerDataObj;
-    public TextMeshProUGUI harvestedText;
-    private int cropsHarvested = 0;
+    public TMP_Dropdown seedSelector;
+    public TextMeshProUGUI numberOfSeedsText;
+    public TextMeshProUGUI solesText;
+    public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI harvestedWheatText;
+    public TextMeshProUGUI harvestedTomatoesText;
+
+    [SerializeField] CropSO[] crops;
+
+    private void Start()
+    {
+        seedSelector.onValueChanged.AddListener(delegate { SelectSeed(seedSelector.value); });
+        SelectSeed(0);
+    }
 
     public void TogglePlayerData()
     {
         PlayerDataObj.SetActive(!PlayerDataObj.activeSelf);
     }
 
-    private void UpdateCropsHarvested(CropRoot crop)
+    private void SelectSeed(int index)
     {
-        cropsHarvested++;
-        if (harvestedText != null)
+        if (index < crops.Length)
         {
-            harvestedText.text = "Harvested: " + cropsHarvested;
+            EventHub.TriggerCropSeedSelected(crops[index]);
+            UpdateSeedCount(crops[index]);
         }
+    }
+
+    private void UpdateSeedCount(CropSO crop)
+    {
+        for (int i = 0; i < crops.Length; i++)
+        {
+            if (seedSelector.value == i && crops[i] == crop)
+            {
+                numberOfSeedsText.text = Player.Instance.GetSeedCount(crops[i].cropType).ToString();
+            }
+        }
+    }
+
+    private void UpdateCoins(int newValue)
+    {
+        coinsText.text = newValue.ToString();
+    }
+
+    private void UpdateSoles(int newValue)
+    {
+        solesText.text = newValue.ToString();
     }
 
     private void OnEnable()
     {
-        EventHub.OnCropHarvested += UpdateCropsHarvested;
+        EventHub.OnCropSeedCountChanged += UpdateSeedCount;
+        EventHub.OnCoinsCountChanged += UpdateCoins;
+        EventHub.OnSolesCountChanged += UpdateSoles;
     }
-    
     private void OnDisable()
     {
-        EventHub.OnCropHarvested -= UpdateCropsHarvested;
+        EventHub.OnCropSeedCountChanged -= UpdateSeedCount;
+        EventHub.OnCoinsCountChanged -= UpdateCoins;
+        EventHub.OnSolesCountChanged -= UpdateSoles;
     }
 }
