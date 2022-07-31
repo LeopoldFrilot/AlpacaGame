@@ -16,10 +16,20 @@ public class AlpacaIUController : MonoBehaviour
     public GameObject fullheartPrefab;
 
     [SerializeField] private int closeupZoomThreshold = 45;
+    private bool zoomUpdate;
+
+    private void LateUpdate()
+    {
+        if (zoomUpdate)
+        {
+            closeupUI.SetActive(closeupZoomThreshold >= CameraManager.Instance.GetZoom());
+            zoomUpdate = false;
+        }
+    }
 
     private void HandleScroll(Vector2 unused)
     {
-        closeupUI.SetActive(closeupZoomThreshold >= CameraManager.Instance.GetZoom());
+        zoomUpdate = true;
     }
     
     private void OnEnable()

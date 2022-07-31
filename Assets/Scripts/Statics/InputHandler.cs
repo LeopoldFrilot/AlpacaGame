@@ -34,31 +34,71 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     private Camera mainCamera;
-
+    private Vector3 lastMousePosition;
     private float checkForClickTimer = 0f;
+
+    private Touch touch0;
+    private Touch touch1;
+    private int touchCount;
+    private Vector3 lastTouch1Position;
 
     private void Update()
     {
+        touchCount = Input.touchCount;
+        if (touchCount > 0)
+        {
+            touch0 = Input.GetTouch(0);
+            if (touchCount > 1)
+            {
+                touch1 = Input.GetTouch(1);
+            }
+        }
+        
         checkForClickTimer -= Time.deltaTime;
         if (checkForClickTimer <= 0f)
         {
-            CheckForClick();
+            CheckForClickDown();
         }
 
-        Vector2 scrollDelta = Input.mouseScrollDelta;
-        if (scrollDelta != Vector2.zero)
+        if (touchCount > 1)
         {
-            EventHub.TriggerScroll(scrollDelta);
+            EventHub.TriggerScroll(new Vector2(0,
+                Vector3.Distance(touch0.position, touch1.position) - Vector3.Distance(lastMousePosition, lastTouch1Position)));
+        }
+        else if (Input.mouseScrollDelta != Vector2.zero)
+        {
+            EventHub.TriggerScroll(Input.mouseScrollDelta);
+        }
+
+        if (touchCount > 1)
+        {
+            EventHub.TriggerMiddleMouseDown((touch0.position + touch1.position) / 2f - (Vector2)(lastMousePosition + lastTouch1Position) / 2f);
+        }
+        else if (Input.GetKey(KeyCode.Mouse2))
+        {
+            EventHub.TriggerMiddleMouseDown(Input.mousePosition - lastMousePosition);
+        }
+
+        if (touchCount > 0)
+        {
+            lastMousePosition = touch0.position;
+            if (touchCount > 1)
+            {
+                lastTouch1Position = touch1.position;
+            }
+        }
+        else
+        {
+            lastMousePosition = Input.mousePosition;
         }
     }
 
-    private void CheckForClick()
+    private void CheckForClickDown()
     {
         bool found = false;
-        if (Input.touchCount > 0)
+        if (touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
-            EventHub.TriggerClickDown(ConvertMouseScreenToWorld(touch.position));
+            EventHub.TriggerClickDown(ConvertMouseScreenToWorld(touch0.position));
             found = true;
         }
         else if (Input.GetMouseButtonDown(0))
