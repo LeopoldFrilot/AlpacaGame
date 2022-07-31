@@ -39,6 +39,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private int maxScreenSize = 540;
     [SerializeField] private int minScreenSize = 10;
     [SerializeField] private float zoomSensitivity = 2000f;
+    [SerializeField] private float panSensitivity = 1000f;
 
     private Camera mainCamera;
 
@@ -47,9 +48,9 @@ public class CameraManager : MonoBehaviour
         mainCamera = GetComponent<Camera>();
     }
 
-    public void MoveScreen(Vector3 delta)
+    public void MoveScreen(Vector2 delta)
     {
-        transform.position += delta;
+        transform.position = ClampPosition(transform.position + -(Vector3)delta * (Time.deltaTime * panSensitivity * (maxScreenSize - GetZoom()))/maxScreenSize);
     }
 
     public void ChangeZoomUsingDelta(float delta)
@@ -60,6 +61,7 @@ public class CameraManager : MonoBehaviour
     public void SetZoom(float newZoom)
     {
         mainCamera.orthographicSize = Mathf.Clamp(newZoom, minScreenSize, maxScreenSize);
+        transform.position = ClampPosition(transform.position);
     }
 
     private void HandleScroll(Vector2 delta)
@@ -72,13 +74,26 @@ public class CameraManager : MonoBehaviour
         return mainCamera.orthographicSize;
     }
 
+    private Vector3 ClampPosition(Vector3 position)
+    {
+        float xExtent = (maxScreenSize - GetZoom()) * 16f / 9f;
+        float yExtent = maxScreenSize - GetZoom();
+        
+        return new Vector3(
+            Mathf.Clamp(position.x, -xExtent, xExtent),
+            Mathf.Clamp(position.y, -yExtent, yExtent),
+            position.z);
+    }
+
     private void OnEnable()
     {
         EventHub.OnScroll += HandleScroll;
+        EventHub.OnMiddleMouseDown += MoveScreen;
     }
 
     private void OnDisable()
     {
         EventHub.OnScroll -= HandleScroll;
+        EventHub.OnMiddleMouseDown -= MoveScreen;
     }
 }

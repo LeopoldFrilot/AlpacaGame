@@ -80,4 +80,10 @@ public static class EventHub
     {
         OnAlpacaPet?.Invoke(alpaca);
     }
+    
+    public static event Action<Vector2> OnMiddleMouseDown;
+    public static void TriggerMiddleMouseDown(Vector2 delta)
+    {
+        OnMiddleMouseDown?.Invoke(delta);
+    }
 }
