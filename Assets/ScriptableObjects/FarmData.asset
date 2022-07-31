@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: FarmData
   m_EditorClassIdentifier: 
   wateringSound: {fileID: 0}
-  wateringSoundVolume: 1
+  wateringSoundVolume: 0.5
   plantingSound: {fileID: 0}
-  plantingSoundVolume: 1
+  plantingSoundVolume: 0.5
   harvestingSound: {fileID: 0}
-  harvestingSoundVolume: 1
+  harvestingSoundVolume: 0.5
   pickingWeedsSound: {fileID: 0}
-  pickingWeedsSoundVolume: 1
+  pickingWeedsSoundVolume: 0.5
   hoeingDirtSound: {fileID: 0}
-  hoeingDirtSoundVolume: 1
-  shearingAlpacaSound: {fileID: 0}
-  shearingAlpacaSoundVolume: 1
+  hoeingDirtSoundVolume: 0.5
+  packingDirtSound: {fileID: 0}
+  packingDirtSoundVolume: 0.5
+  ambientSound: {fileID: 0}
+  ambientSoundVolume: 0.5
