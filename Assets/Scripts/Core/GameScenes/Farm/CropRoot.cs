@@ -16,12 +16,17 @@ public class CropRoot : MonoBehaviour, IClickable
     public SpriteRenderer cropRenderer;
 
     [SerializeField] private GeneralCropSO genCropData;
+
+    private GameplayManager gameplayManager;
+    private FarmScene farm;
     private CropSO cropData;
     private float growthTime;
     private int growthRank;
 
     private void Start()
     {
+        gameplayManager = FindObjectOfType<GameplayManager>();
+        farm = gameplayManager.farm;
         dirtRenderer.sprite = genCropData.dirtSprites[Random.Range(0, genCropData.dirtSprites.Count - 1)];
     }
 
@@ -45,6 +50,7 @@ public class CropRoot : MonoBehaviour, IClickable
                 var seed = Player.Instance.GetSelectedCropSeed();
                 if (seed != null && Player.Instance.GetSeedCount(seed.cropType) > 0)
                 {
+                    AudioHub.Instance.PlayClip(farm.farmData.plantingSound, farm.farmData.plantingSoundVolume);
                     cropData = seed;
                     growthTime = 0f;
                     GrowFor(0f);
@@ -55,6 +61,7 @@ public class CropRoot : MonoBehaviour, IClickable
             {
                 if (ReadyForHarvest())
                 {
+                    AudioHub.Instance.PlayClip(farm.farmData.harvestingSound, farm.farmData.harvestingSoundVolume);
                     EventHub.TriggerCropHarvested(this);
                     Player.Instance.ChangeSeedCount(cropData, 1);
                     Player.Instance.CoinChange(cropData.cropType == CropSO.CropType.Wheat ? 25 : 500);

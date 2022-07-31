@@ -16,9 +16,17 @@ public class FarmScene : MonoBehaviour, IGameScene
 
     public List<GridManager> cropGridManagers = new();
     public PomodoroManager pomodoroManager;
+    public FarmSO farmData;
     
     private List<CropRoot> cropRoots = new();
     private bool initialized = false;
+    private AudioSource loopingAmbientSound;
+
+    private void Start()
+    {
+        loopingAmbientSound = AudioHub.Instance.SetupLoopingClip(farmData.ambientSound, farmData.ambientSoundVolume);
+        AudioHub.Instance.PlayLoopingCLip(loopingAmbientSound);
+    }
 
     public void Initialize()
     {
@@ -33,6 +41,7 @@ public class FarmScene : MonoBehaviour, IGameScene
             }
 
             initialized = true;
+            AudioHub.Instance.PlayLoopingCLip(loopingAmbientSound);
         }
     }
     
@@ -68,7 +77,7 @@ public class FarmScene : MonoBehaviour, IGameScene
                         foreach (CropRoot crop in cropRoots)
                         {
                             if (crop.WouldBeClicked(worldPos))
-                            {      
+                            {
                                 crop.HandleClickDown(worldPos);
                                 cropGridManager.UpdateGridValue(worldPos, (int)(crop.IsSeeded() ? CropGridStatus.Seeded : CropGridStatus.Tilled));
                                 break;
@@ -86,6 +95,7 @@ public class FarmScene : MonoBehaviour, IGameScene
         CropRoot cropRoot = newCrop.GetComponent<CropRoot>();
         if (cropRoot != null)
         {
+            AudioHub.Instance.PlayClip(farmData.hoeingDirtSound, farmData.hoeingDirtSoundVolume);
             AddCrop(cropRoot);
         }
         else

@@ -36,9 +36,10 @@ public class Player : MonoBehaviour
     #endregion
 
     private PlayerStats playerStats;
-
+    private PlayerSO playerData;
     private CropSO selectedCropSeed;
     private GameplayManager gameplayManager;
+    private AudioSource walkingSoundLoop;
 
     private void NonSingletonAwake()
     {
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
     {
         EventHub.TriggerCoinsCountChanged(playerStats.coins);
         EventHub.TriggerSolesCountChanged(playerStats.soles);
+        walkingSoundLoop = AudioHub.Instance.SetupLoopingClip(playerData.walkSound, playerData.walkSoundVolume);
     }
 
     private void HandleClickDown(Vector2 worldPos)

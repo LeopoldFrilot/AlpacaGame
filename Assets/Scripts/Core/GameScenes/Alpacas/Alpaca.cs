@@ -6,15 +6,26 @@ using UnityEngine;
 
 public class Alpaca : MonoBehaviour
 {
-    public AlpacaPet alpacaPet;
     public AlpacaStatsSO alpacaStat;
     public GameObject petParticles;
+    public GeneralAlpacaSO generalAlpacaData;
+
+    private AudioSource alpacaWalkLoop;
+    
+    private void Start()
+    {
+        alpacaWalkLoop = AudioHub.Instance.SetupLoopingClip(generalAlpacaData.walkSound, generalAlpacaData.walkSoundVolume);
+    }
 
     private void PetAlpaca(Alpaca alpaca)
     {
         if (alpaca == this)
         {
-            
+            if (petParticles != null)
+            {
+                Instantiate(petParticles, transform);
+            }
+            AudioHub.Instance.PlayClip(generalAlpacaData.alpacaHeartsSound, generalAlpacaData.alpacaHeartsSoundVolume);
         }
     }
     private void OnEnable()

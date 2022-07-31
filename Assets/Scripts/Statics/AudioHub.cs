@@ -60,26 +60,40 @@ public class AudioHub : MonoBehaviour
 
     public AudioSource SetupLoopingClip(AudioClip clip, float volumeScale)
     {
-        GameObject gO = new GameObject();
-        gO.transform.parent = transform;
+        if (clip != null)
+        {
+            GameObject gO = new GameObject();
+            gO.transform.parent = transform;
 
-        var audioSource = gO.AddComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.volume = ScaleSFXVolume(volumeScale);
-        audioSource.loop = true;
-        audioSource.playOnAwake = false;
+            AudioSource newAudioSource = gO.AddComponent<AudioSource>();
+            newAudioSource.clip = clip;
+            newAudioSource.volume = ScaleSFXVolume(volumeScale);
+            newAudioSource.loop = true;
+            newAudioSource.playOnAwake = false;
 
-        loopingClips.Add(audioSource);
-        initialVolumes.Add(volumeScale);
+            loopingClips.Add(newAudioSource);
+            initialVolumes.Add(volumeScale);
 
-        return audioSource;
+            return newAudioSource;
+        }
+
+        return null;
     }
 
     public void PlayLoopingCLip(AudioSource source)
     {
-        if (!source.isPlaying)
+        if (source != null && !source.isPlaying)
         {
             source.Play();
+        }
+    }
+
+    public void SetMusic(AudioClip clip, float volumeScale)
+    {
+        if (musicPlayer != null && clip != null)
+        {
+            musicPlayer.clip = clip;
+            musicPlayer.volume = ScaleMusicVolume(volumeScale);
         }
     }
 
