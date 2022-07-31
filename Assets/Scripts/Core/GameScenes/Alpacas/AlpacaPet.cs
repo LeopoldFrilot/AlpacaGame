@@ -5,11 +5,15 @@ using UnityEngine;
 public class AlpacaPet : MonoBehaviour, IClickable
 {
     public Collider2D clickCollider;
+
+    [SerializeField] private int loveNeededToRegisterPet = 5;
     private int alpacaLove;
+    private Alpaca alpacaRef;
     
     private void Start()
     {
         alpacaLove = 0;
+        alpacaRef = GetComponent<Alpaca>();
     }
 
     public void HandleClickDown(Vector2 clickLocation)
@@ -20,6 +24,11 @@ public class AlpacaPet : MonoBehaviour, IClickable
             //when dude is clicked
             alpacaLove++;
             Debug.Log("Alpaca " + gameObject.name + " love: " + alpacaLove);
+            if (alpacaLove >= loveNeededToRegisterPet)
+            {
+                alpacaLove = 0;
+                EventHub.TriggerAlpacaPet(alpacaRef);
+            }
         }
     }
 
