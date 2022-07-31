@@ -44,7 +44,12 @@ public class InputHandler : MonoBehaviour
         {
             CheckForClick();
         }
-        
+
+        Vector2 scrollDelta = Input.mouseScrollDelta;
+        if (scrollDelta != Vector2.zero)
+        {
+            EventHub.TriggerScroll(scrollDelta);
+        }
     }
 
     private void CheckForClick()

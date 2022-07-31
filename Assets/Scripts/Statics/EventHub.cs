@@ -33,6 +33,12 @@ public static class EventHub
         OnClickDown?.Invoke(clickLocation);
     }
     
+    public static event Action<Vector2> OnScroll;
+    public static void TriggerScroll(Vector2 delta)
+    {
+        OnScroll?.Invoke(delta);
+    }
+    
     public static event Action<int> OnPomodoroEnded;
     public static void TriggerPomodoroEnded(int originalTimeInMinutes)
     {
@@ -67,5 +73,11 @@ public static class EventHub
     public static void TriggerCoinsCountChanged(int newValue)
     {
         OnCoinsCountChanged?.Invoke(newValue);
+    }
+    
+    public static event Action<Alpaca> OnAlpacaPet;
+    public static void TriggerAlpacaPet(Alpaca alpaca)
+    {
+        OnAlpacaPet?.Invoke(alpaca);
     }
 }
