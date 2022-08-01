@@ -35,8 +35,9 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    public PlayerSO playerData;
+    
     private PlayerStats playerStats;
-    private PlayerSO playerData;
     private CropSO selectedCropSeed;
     private GameplayManager gameplayManager;
     private AudioSource walkingSoundLoop;
