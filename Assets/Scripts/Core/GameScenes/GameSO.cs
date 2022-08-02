@@ -22,10 +22,4 @@ public class GameSO : ScriptableObject
     [Range(0,1)] public float breakStartSoundVolume = .5f;
     public AudioClip breakEndSound;
     [Range(0,1)] public float breakEndSoundVolume = .5f;
-
-    [Header("Minigame")]
-    public AudioClip miningRhythmSound;
-    [Range(0, 1)] public float miningRhythmSoundVolume = .5f;
-    public AudioClip fishingSound;
-    [Range(0, 1)] public float fishingSoundVolume = .5f;
 }
